@@ -52,3 +52,4 @@ ui-debug.log
 /playwright-report/
 /.firebase/
 *.tsbuildinfo
+!.env.example
