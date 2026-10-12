@@ -72,7 +72,10 @@ export function SeatPicker({ event, venue }: { event: Event; venue: Venue }) {
   }, [ready, authLoading, docs, now, mine, seatDefs, removeSeats, uid]);
 
   function onToggle(seat: SeatView) {
-    if (toggleSeat(event.id, seat) === "limit") toast.error(`Maksimal ${MAX_PER_ORDER} kursi per pesanan.`);
+    const result = toggleSeat(event.id, seat);
+    if (result === "limit") toast.error(`Maksimal ${MAX_PER_ORDER} kursi per pesanan.`);
+    // Getaran singkat di HP sebagai umpan balik sentuhan (diabaikan di perangkat yang tidak mendukung).
+    else navigator.vibrate?.(result === "added" ? 12 : 6);
   }
 
   const total = mine.reduce((sum, i) => sum + (event.categories.find((c) => c.id === i.categoryId)?.price ?? 0) * i.qty, 0);
@@ -150,7 +153,7 @@ function ZoomButton({ label, onClick, children }: { label: string; onClick: () =
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="grid size-10 place-items-center rounded-xl border border-line bg-elevated text-fg hover:border-primary [&_svg]:size-4"
+      className="pressable grid size-10 place-items-center rounded-xl border border-line bg-elevated text-fg hover:border-primary [&_svg]:size-4"
     >
       {children}
     </button>

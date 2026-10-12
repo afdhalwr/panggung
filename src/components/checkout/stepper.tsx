@@ -35,7 +35,7 @@ export function Stepper({ current, maxReached }: { current: StepSlug; maxReached
           return (
             <li key={step.slug} className="flex items-center gap-2 sm:gap-3" aria-current={active ? "step" : undefined}>
               {reachable ? (
-                <Link href={`/checkout/${step.slug}`} className="flex items-center gap-2 rounded-full hover:opacity-80">
+                <Link href={`/checkout/${step.slug}`} className="pressable flex items-center gap-2 rounded-full hover:opacity-80">
                   {dot}
                   {text}
                   <span className="sr-only">{done ? " (selesai)" : ""}</span>

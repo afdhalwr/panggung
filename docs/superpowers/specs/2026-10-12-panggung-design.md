@@ -49,7 +49,7 @@ Semua waktu disimpan sebagai angka epoch milidetik (bukan `Timestamp`), supaya t
 { eventId, categoryId, sold: number, holds: { [orderId]: { qty: number, uid: string, expiresAt: number } } }
 
 // orders/{orderId}
-{ id, uid, eventId, items: { categoryId, seatId?, qty }[], buyer?: { name, email, phone, nik? },
+{ id, uid, eventId, items: { categoryId, seatId?, qty }[], buyer?: { name, email, phone },
   method?: 'va' | 'ewallet' | 'card', status: 'pending' | 'paid' | 'failed' | 'expired' | 'cancelled',
   total, holdExpiresAt, createdAt, paidAt? }
 
@@ -109,7 +109,7 @@ Status kursi tidak lewat API; klien membaca Firestore langsung. Delay/chaos hany
 2. **`POST /api/orders`** dalam satu transaction: batalkan order `pending` milik pengguna untuk event yang sama (lepas kursi/holds-nya); cek setiap kursi dengan `isSeatAvailable`; gagal → 409 dengan daftar kursi. Tulis `seats` held + `holdExpiresAt = now + 10 menit`, tulis order `pending` dengan total dari seed. Respons `{ orderId, holdExpiresAt, serverNow, total }`.
 3. **Klien**: 409 → toast "Kursi A12 baru saja diambil orang lain", lepas kursi itu. Sukses → simpan ke store, `clockOffset = serverNow − Date.now()`, buka `/checkout/data`.
 4. **Countdown**: `remainingMs(holdExpiresAt, Date.now() + clockOffset)`; badge di semua langkah, warna magenta saat < 2 menit.
-5. **Checkout**: `data` (nama, email, HP `^(\+62|62|0)8\d{8,11}$`, NIK opsional 16 digit) → `pembayaran` (VA / e-wallet / kartu, semua dummy, plus tombol "Simulasikan gagal") → `konfirmasi`. Isian disimpan di store; langkah berikutnya terkunci sampai langkah sebelumnya valid.
+5. **Checkout**: `data` (nama, email, HP `^(\+62|62|0)8\d{8,11}$`; NIK tidak diminta) → `pembayaran` (VA / e-wallet / kartu, semua dummy, plus tombol "Simulasikan gagal") → `konfirmasi`. Isian disimpan di store; langkah berikutnya terkunci sampai langkah sebelumnya valid.
 6. **`POST /api/orders/[id]/pay`**: transaction cek pemilik, `pending`, belum kedaluwarsa. `?fail=true` → 402 (order tetap pending). Sukses → kursi `sold`, `inventory.sold += qty` dan hapus hold, order `paid`, tiket dibuat dengan `qrPayload = PANGGUNG.{ticketId}.{hmac16}`. Klien mengosongkan cart dan membuka `/tickets/[id]`.
 7. **Kedaluwarsa**: timer 0 atau reload setelah lewat → modal "Waktu habis, kursi dilepas", cart dikosongkan, kembali ke denah.
 

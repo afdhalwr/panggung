@@ -70,7 +70,7 @@ export function LoginForm() {
               setMode(m);
               setError("");
             }}
-            className={cn("flex-1 rounded-full py-2 text-sm font-semibold capitalize", mode === m ? "bg-elevated text-fg" : "text-muted")}
+            className={cn("pressable flex-1 rounded-full py-2 text-sm font-semibold capitalize", mode === m ? "bg-elevated text-fg" : "text-muted hover:text-fg")}
           >
             {m}
           </button>

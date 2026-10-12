@@ -28,9 +28,6 @@ export function BuyerForm({ defaultValues, onSubmit }: Props) {
       <Field id="phone" label="Nomor HP" hint="Contoh: 0812 3456 7890" error={errors.phone?.message}>
         <input id="phone" type="tel" inputMode="tel" autoComplete="tel" {...register("phone")} {...aria("phone", errors.phone?.message, true)} className={inputCls(!!errors.phone)} />
       </Field>
-      <Field id="nik" label="NIK (opsional)" hint="16 digit sesuai KTP. Beberapa venue mewajibkan NIK di tiket." error={errors.nik?.message}>
-        <input id="nik" inputMode="numeric" maxLength={16} autoComplete="off" {...register("nik")} {...aria("nik", errors.nik?.message, true)} className={inputCls(!!errors.nik)} />
-      </Field>
       <Button type="submit" size="lg" disabled={isSubmitting} className="mt-2">
         Lanjut ke pembayaran
       </Button>

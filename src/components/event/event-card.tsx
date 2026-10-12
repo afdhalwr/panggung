@@ -14,7 +14,7 @@ export function EventCard({ event, headingLevel = 3 }: { event: Event; headingLe
   return (
     <Link
       href={`/events/${event.slug}`}
-      className="group flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface transition-colors hover:border-primary/60"
+      className="lift group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface hover:border-primary/60"
     >
       <div className="relative aspect-[3/2] overflow-hidden">
         <Poster event={event} className="size-full transition-transform duration-500 group-hover:scale-105" />

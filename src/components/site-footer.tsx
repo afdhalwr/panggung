@@ -10,14 +10,14 @@ export function SiteFooter() {
         </p>
         <p>
           Dibuat oleh{" "}
-          <a href="https://www.linkedin.com/in/afdhal-anwar-431779211" className="font-medium text-fg underline-offset-4 hover:underline">
+          <a href="https://www.linkedin.com/in/afdhal-anwar-431779211" className="link-underline font-medium text-fg">
             Afdhal Anwar
           </a>{" "}
           ·{" "}
-          <a href="https://github.com/afdhalwr/panggung" className="font-medium text-fg underline-offset-4 hover:underline">
+          <a href="https://github.com/afdhalwr/panggung" className="link-underline font-medium text-fg">
             Kode di GitHub
           </a>{" "}
-          · <Link href="/events" className="hover:text-fg">Semua konser</Link>
+          · <Link href="/events" className="link-underline hover:text-fg">Semua konser</Link>
         </p>
       </div>
     </footer>

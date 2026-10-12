@@ -23,7 +23,6 @@ export function ConfirmStep({ buyer, method, total, busy, error, onPay, onBack }
         <Row label="Nama" value={buyer.name} />
         <Row label="Email" value={buyer.email} />
         <Row label="Nomor HP" value={buyer.phone} />
-        {buyer.nik && <Row label="NIK" value={`${buyer.nik.slice(0, 4)} •••• •••• ${buyer.nik.slice(-4)}`} />}
         <Row label="Pembayaran" value={PAYMENT_LABEL[method]} />
       </dl>
 

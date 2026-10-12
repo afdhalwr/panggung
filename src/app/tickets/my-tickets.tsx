@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ChevronRight, Ticket } from "lucide-react";
+import { Reveal } from "@/components/motion/reveal";
 import { TicketCard } from "@/components/ticket/ticket-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -74,13 +75,15 @@ export function MyTickets() {
                 <span className="text-sm text-muted">{tickets.length} tiket</span>
               </div>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {tickets.map((t) => (
-                  <Link key={t.id} href={`/tickets/${t.id}`} className="group block rounded-[var(--radius-card)] transition-transform hover:-translate-y-0.5">
+                {tickets.map((t, i) => (
+                  <Reveal key={t.id} index={i}>
+                  <Link href={`/tickets/${t.id}`} className="lift group block rounded-[var(--radius-card)]">
                     <TicketCard ticket={t} compact />
                     <span className="mt-2 flex items-center gap-1 px-1 text-sm font-semibold text-primary group-hover:underline">
                       Lihat QR <ChevronRight className="size-4" />
                     </span>
                   </Link>
+                  </Reveal>
                 ))}
               </div>
             </section>

@@ -50,7 +50,7 @@ export function TicketDetail({ id, fresh }: { id: string; fresh: boolean }) {
           <p className="text-muted">Tunjukkan QR ini di pintu masuk. Semua tiket juga tersimpan di Tiket Saya.</p>
         </div>
       ) : (
-        <Link href="/tickets" className="inline-flex items-center gap-1 text-sm font-semibold text-muted hover:text-fg">
+        <Link href="/tickets" className="pressable inline-flex items-center gap-1 text-sm font-semibold text-muted hover:text-fg">
           <ChevronLeft className="size-4" /> Tiket Saya
         </Link>
       )}
@@ -72,7 +72,7 @@ export function TicketDetail({ id, fresh }: { id: string; fresh: boolean }) {
           <ul className="flex flex-col gap-2">
             {others.map((t) => (
               <li key={t.id}>
-                <Link href={`/tickets/${t.id}${fresh ? "?baru=1" : ""}`} className="flex items-center justify-between rounded-2xl border border-line bg-surface px-4 py-3 hover:border-primary">
+                <Link href={`/tickets/${t.id}${fresh ? "?baru=1" : ""}`} className="pressable flex items-center justify-between rounded-2xl border border-line bg-surface px-4 py-3 hover:border-primary">
                   <span className="font-semibold">
                     {t.categoryName}
                     {t.seatLabel ? ` · Kursi ${t.seatLabel}` : ""}

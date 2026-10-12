@@ -132,11 +132,6 @@ export const buyerSchema = z.object({
     .trim()
     .transform((v) => v.replace(/[\s-]/g, ""))
     .pipe(z.string().regex(/^(\+62|62|0)8\d{8,11}$/, "Nomor HP minimal 10 digit, diawali 08 atau +62.")),
-  nik: z
-    .string()
-    .trim()
-    .optional()
-    .refine((v) => !v || /^\d{16}$/.test(v), "NIK harus 16 digit angka."),
 });
 export type Buyer = z.infer<typeof buyerSchema>;
 export type BuyerInput = z.input<typeof buyerSchema>;

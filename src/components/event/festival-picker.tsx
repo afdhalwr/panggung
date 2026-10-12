@@ -52,11 +52,11 @@ export function FestivalPicker({ event, venueName }: { event: Event; venueName: 
                   onClick={() => change(c.id, qty - 1, left)}
                   disabled={!qty}
                   aria-label={`Kurangi tiket ${c.name}`}
-                  className="grid size-10 place-items-center rounded-full border border-line disabled:opacity-40 [&_svg]:size-4"
+                  className="pressable grid size-10 place-items-center rounded-full border border-line hover:border-muted disabled:opacity-40 [&_svg]:size-4"
                 >
                   <Minus />
                 </button>
-                <span className="w-6 text-center text-lg font-bold" aria-live="polite">
+                <span key={qty} className="w-6 text-center text-lg font-bold [animation:pop_220ms_var(--ease-spring)]" aria-live="polite">
                   {qty}
                 </span>
                 <button
@@ -64,7 +64,7 @@ export function FestivalPicker({ event, venueName }: { event: Event; venueName: 
                   onClick={() => change(c.id, qty + 1, left)}
                   disabled={!left}
                   aria-label={`Tambah tiket ${c.name}`}
-                  className="grid size-10 place-items-center rounded-full bg-primary text-on-primary disabled:opacity-40 [&_svg]:size-4"
+                  className="pressable grid size-10 place-items-center rounded-full bg-primary text-on-primary hover:shadow-[0_6px_20px_-6px_var(--brand-primary)] disabled:opacity-40 [&_svg]:size-4"
                 >
                   <Plus />
                 </button>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 import { EventCard } from "@/components/event/event-card";
+import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { CITIES, filterEvents, getEvents } from "@/lib/catalog";
 
@@ -52,7 +53,7 @@ export default function HomePage() {
               <Link
                 key={city}
                 href={`/events?city=${city}`}
-                className="rounded-full border border-line bg-base/60 px-3.5 py-1.5 text-sm font-medium backdrop-blur hover:border-primary hover:text-primary"
+                className="pressable rounded-full border border-line bg-base/60 px-3.5 py-1.5 text-sm font-medium backdrop-blur hover:border-primary hover:text-primary"
               >
                 {city}
               </Link>
@@ -66,13 +67,15 @@ export default function HomePage() {
           <h2 id="unggulan" className="font-display text-3xl font-bold">
             Konser unggulan
           </h2>
-          <Link href="/events?sort=popular" className="flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+          <Link href="/events?sort=popular" className="link-underline flex items-center gap-1 text-sm font-semibold text-primary">
             Lihat semua <ArrowRight className="size-4" />
           </Link>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((e) => (
-            <EventCard key={e.id} event={e} />
+          {featured.map((e, i) => (
+            <Reveal key={e.id} index={i}>
+              <EventCard event={e} />
+            </Reveal>
           ))}
         </div>
       </section>
@@ -82,8 +85,10 @@ export default function HomePage() {
           Segera hadir
         </h2>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {upcoming.map((e) => (
-            <EventCard key={e.id} event={e} />
+          {upcoming.map((e, i) => (
+            <Reveal key={e.id} index={i}>
+              <EventCard event={e} />
+            </Reveal>
           ))}
         </div>
       </section>

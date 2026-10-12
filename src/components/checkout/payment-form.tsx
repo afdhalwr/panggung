@@ -31,7 +31,7 @@ export function PaymentForm({ initial, onSubmit, onBack }: { initial?: PaymentMe
           <label
             key={o.value}
             className={cn(
-              "flex cursor-pointer items-center gap-4 rounded-2xl border bg-surface p-4 transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-primary",
+              "pressable flex cursor-pointer items-center gap-4 rounded-2xl border bg-surface p-4 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-primary",
               method === o.value ? "border-primary bg-primary/5" : "border-line hover:border-muted",
             )}
           >

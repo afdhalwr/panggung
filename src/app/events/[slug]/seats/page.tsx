@@ -22,7 +22,7 @@ export default async function SeatsPage({ params }: Params) {
 
   return (
     <div className="mx-auto max-w-6xl px-4 pb-32 pt-6 lg:pb-12">
-      <Link href={`/events/${event.slug}`} className="mb-4 inline-flex items-center gap-1 text-sm font-semibold text-muted hover:text-fg">
+      <Link href={`/events/${event.slug}`} className="pressable mb-4 inline-flex items-center gap-1 text-sm font-semibold text-muted hover:text-fg">
         <ChevronLeft className="size-4" /> {event.title}
       </Link>
       <h1 className="font-display text-4xl font-extrabold tracking-tight">{seated ? "Pilih kursi" : "Pilih tiket"}</h1>

@@ -134,7 +134,7 @@ export function EventsBrowser({ initial, count, children }: { initial: EventFilt
               setQ("");
               apply(filter.sort ? { sort: filter.sort } : {});
             }}
-            className="flex items-center gap-1 font-semibold text-primary hover:underline"
+            className="pressable link-underline flex items-center gap-1 font-semibold text-primary"
           >
             <X className="size-4" /> Hapus filter
           </button>

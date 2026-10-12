@@ -95,7 +95,7 @@ function ActiveCheckout({ step, order, onFinish }: { step: StepSlug; order: Held
         <div className="min-w-0">
           {step === "data" && (
             <BuyerForm
-              defaultValues={buyer ?? { name: user?.displayName ?? "", email: user?.email ?? "", phone: "", nik: "" }}
+              defaultValues={buyer ?? { name: user?.displayName ?? "", email: user?.email ?? "", phone: "" }}
               onSubmit={(b) => {
                 saveBuyer(b);
                 router.push("/checkout/pembayaran");

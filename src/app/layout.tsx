@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Suspense } from "react";
 import { SiteFooter } from "@/components/site-footer";
+import { NavigationProgress } from "@/components/motion/navigation-progress";
+import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -32,16 +35,21 @@ export const viewport: Viewport = {
 };
 
 // Dijalankan sebelum render agar tidak ada kedipan saat pengguna memilih mode terang.
-const themeScript = `try{if(localStorage.getItem('panggung-theme')==='light')document.documentElement.classList.add('light')}catch(e){}`;
+// Kelas .js menandai JavaScript aktif (untuk animasi muncul saat scroll).
+const themeScript = `document.documentElement.classList.add('js');try{if(localStorage.getItem('panggung-theme')==='light')document.documentElement.classList.add('light')}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${bricolage.variable} ${jakarta.variable} flex min-h-dvh flex-col antialiased`}>
         <Providers>
+          <SmoothScroll />
+          <Suspense>
+            <NavigationProgress />
+          </Suspense>
           <a href="#konten" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-on-primary">
             Lewati ke konten
           </a>

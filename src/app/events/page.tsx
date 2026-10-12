@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { CalendarX } from "lucide-react";
 import { EventCard } from "@/components/event/event-card";
 import { EventsBrowser } from "@/components/event/filter-bar";
+import { Reveal } from "@/components/motion/reveal";
 import { filterEvents, getEvents, parseFilter } from "@/lib/catalog";
 
 export const metadata: Metadata = {
@@ -19,8 +20,10 @@ export default async function EventsPage({ searchParams }: { searchParams: Promi
       <EventsBrowser initial={filter} count={events.length}>
         {events.length ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {events.map((e) => (
-              <EventCard key={e.id} event={e} headingLevel={2} />
+            {events.map((e, i) => (
+              <Reveal key={e.id} index={i % 3}>
+                <EventCard event={e} headingLevel={2} />
+              </Reveal>
             ))}
           </div>
         ) : (

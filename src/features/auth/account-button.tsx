@@ -38,7 +38,7 @@ export function AccountButton() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className="grid size-10 place-items-center rounded-full bg-primary font-display text-lg font-bold text-on-primary"
+        className="pressable grid size-10 place-items-center rounded-full bg-primary font-display text-lg font-bold text-on-primary hover:shadow-[0_6px_20px_-6px_var(--brand-primary)]"
       >
         <span className="sr-only">Menu akun {name}</span>
         <span aria-hidden>{name.charAt(0).toUpperCase()}</span>
@@ -46,7 +46,7 @@ export function AccountButton() {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 top-12 w-56 overflow-hidden rounded-2xl border border-line bg-surface p-1.5 shadow-xl"
+          className="absolute right-0 top-12 w-56 origin-top-right overflow-hidden rounded-2xl border border-line bg-surface p-1.5 shadow-xl [animation:menu-in_160ms_var(--ease-spring)]"
           onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
         >
           <p className="truncate px-3 py-2 text-sm text-muted">{email}</p>
@@ -54,7 +54,7 @@ export function AccountButton() {
             role="menuitem"
             href="/tickets"
             onClick={() => setOpen(false)}
-            className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-elevated"
+            className="pressable flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-elevated"
           >
             <Ticket className="size-4" /> Tiket Saya
           </Link>
@@ -65,7 +65,7 @@ export function AccountButton() {
               setOpen(false);
               void signOut();
             }}
-            className="flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-elevated"
+            className="pressable flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-elevated"
           >
             <LogOut className="size-4" /> Keluar
           </button>

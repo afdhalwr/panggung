@@ -2,8 +2,10 @@ import { expect, type Page } from "@playwright/test";
 
 export async function loginAsDemo(page: Page) {
   await page.goto("/login");
+  // Tombol "Masuk" di header baru dirender setelah hydration: tanda aplikasi siap menerima klik.
+  await expect(page.getByRole("banner").getByRole("link", { name: "Masuk" })).toBeVisible({ timeout: 20_000 });
   await page.getByRole("button", { name: "Masuk sebagai demo" }).click();
-  await expect(page).toHaveURL(/\/tickets/);
+  await expect(page).toHaveURL(/\/tickets/, { timeout: 20_000 });
 }
 
 /** Pilih kursi pertama yang tersedia di denah, kembalikan nomornya. */

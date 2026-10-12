@@ -25,7 +25,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggle}
-      className="grid size-10 place-items-center rounded-full text-muted hover:bg-elevated hover:text-fg"
+      className="pressable grid size-10 place-items-center rounded-full text-muted hover:bg-elevated hover:text-fg"
       aria-label={light ? "Ganti ke mode gelap" : "Ganti ke mode terang"}
     >
       {light ? <Moon className="size-5" /> : <Sun className="size-5" />}
