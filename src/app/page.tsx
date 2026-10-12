@@ -1,103 +1,92 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Search } from "lucide-react";
+import { EventCard } from "@/components/event/event-card";
+import { Button } from "@/components/ui/button";
+import { CITIES, filterEvents, getEvents } from "@/lib/catalog";
 
-export default function Home() {
+export default function HomePage() {
+  const events = getEvents();
+  const featured = filterEvents(events.filter((e) => e.featured), { sort: "popular" }).slice(0, 6);
+  const upcoming = filterEvents(events, { sort: "date" }).slice(0, 4);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+    <>
+      <section className="relative isolate overflow-hidden">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/photos/stage-1.webp"
+          alt=""
+          fill
           priority
+          sizes="100vw"
+          className="-z-20 object-cover opacity-55"
         />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-base/40 via-base/70 to-base" />
+        <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 pb-16 pt-20 sm:pt-28">
+          <p className="w-fit rounded-full border border-primary/40 bg-base/60 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+            Pilih kursimu sendiri
+          </p>
+          <h1 className="max-w-2xl font-display text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl">
+            Malam ini milik panggung.
+          </h1>
+          <p className="max-w-xl text-lg text-muted">
+            Cari konser di enam kota, pilih kursi langsung di denah venue, lalu simpan e-ticket ber-QR di HP.
+          </p>
+          <form action="/events" className="flex max-w-xl items-center gap-2 rounded-full border border-line bg-surface/90 p-1.5 pl-5 backdrop-blur">
+            <Search className="size-5 shrink-0 text-muted" aria-hidden />
+            <label htmlFor="cari" className="sr-only">
+              Cari konser
+            </label>
+            <input
+              id="cari"
+              name="q"
+              placeholder="Cari artis, kota, atau venue"
+              className="min-w-0 flex-1 bg-transparent py-2 text-[15px] outline-none placeholder:text-muted"
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <Button type="submit" size="sm">
+              Cari
+            </Button>
+          </form>
+          <nav aria-label="Konser per kota" className="flex flex-wrap gap-2">
+            {CITIES.map((city) => (
+              <Link
+                key={city}
+                href={`/events?city=${city}`}
+                className="rounded-full border border-line bg-base/60 px-3.5 py-1.5 text-sm font-medium backdrop-blur hover:border-primary hover:text-primary"
+              >
+                {city}
+              </Link>
+            ))}
+          </nav>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 pt-6" aria-labelledby="unggulan">
+        <div className="mb-5 flex items-end justify-between gap-4">
+          <h2 id="unggulan" className="font-display text-3xl font-bold">
+            Konser unggulan
+          </h2>
+          <Link href="/events?sort=popular" className="flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+            Lihat semua <ArrowRight className="size-4" />
+          </Link>
+        </div>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((e) => (
+            <EventCard key={e.id} event={e} />
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 pt-16" aria-labelledby="terdekat">
+        <h2 id="terdekat" className="mb-5 font-display text-3xl font-bold">
+          Segera hadir
+        </h2>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {upcoming.map((e) => (
+            <EventCard key={e.id} event={e} />
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

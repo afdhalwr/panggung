@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -34,7 +37,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className={`${bricolage.variable} ${jakarta.variable} antialiased`}>{children}</body>
+      <body className={`${bricolage.variable} ${jakarta.variable} flex min-h-dvh flex-col antialiased`}>
+        <Providers>
+          <a href="#konten" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-on-primary">
+            Lewati ke konten
+          </a>
+          <SiteHeader />
+          <main id="konten" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter />
+        </Providers>
+      </body>
     </html>
   );
 }
