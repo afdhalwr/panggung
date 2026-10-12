@@ -94,6 +94,17 @@ export function uniqueSlug(base: string, taken: Set<string>): string {
   return `${root}-${n}`;
 }
 
+export type CategoryRow = {
+  id: string;
+  name: string;
+  price: number;
+  quota: number;
+  perks?: string;
+  type: "seated" | "festival";
+  /** Terjual (seed + aplikasi) ditambah hold aktif: batas bawah kuota dan penentu boleh dihapus. */
+  minQuota: number;
+};
+
 export type TicketCheck = {
   result: "valid" | "used" | "refunded" | "unknown";
   ticket?: { id: string; eventTitle: string; categoryName: string; seatLabel?: string; buyerName?: string; usedAt?: number };

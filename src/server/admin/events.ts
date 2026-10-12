@@ -1,5 +1,5 @@
 import "server-only";
-import { type CategoriesInput, type EventInfo, categoriesSchema, slugify, uniqueSlug } from "@/lib/admin-schemas";
+import { type CategoriesInput, type CategoryRow, type EventInfo, categoriesSchema, slugify, uniqueSlug } from "@/lib/admin-schemas";
 import { getVenue } from "@/lib/catalog";
 import { adminDb } from "@/lib/firebase/admin";
 import { canBlockSeat, minFestivalQuota } from "@/lib/rules";
@@ -175,4 +175,20 @@ export async function setSeatsBlocked(eventId: string, seatIds: string[], blocke
     return out;
   });
   return { changed };
+}
+
+/** Data tab Kategori: batas bawah kuota tiap kategori festival dari inventory terbaru. */
+export async function getCategoryRows(event: Event): Promise<CategoryRow[]> {
+  const db = adminDb();
+  const snaps = await db.getAll(...event.categories.map((c) => db.collection("inventory").doc(invDocId(event.id, c.id))));
+  const now = Date.now();
+  return event.categories.map((c, i) => ({
+    id: c.id,
+    name: c.name,
+    price: c.price,
+    quota: c.quota,
+    perks: c.perks,
+    type: c.type,
+    minQuota: c.type === "festival" ? minFestivalQuota(c, data<InventoryDoc>(snaps[i]!), now) : c.quota,
+  }));
 }

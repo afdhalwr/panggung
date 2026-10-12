@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { CalendarRange, ExternalLink, LayoutDashboard, LogOut, ReceiptText, ScanLine, ShieldCheck, Users } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useAuth } from "@/features/auth/auth-provider";
@@ -25,6 +25,15 @@ export function AdminShell({ name, email, children }: { name: string; email: str
   const pathname = usePathname();
   const router = useRouter();
   const { user, role, loading, signOut } = useAuth();
+  const nav = useRef<HTMLElement>(null);
+
+  // Di HP menu berupa baris yang bisa digeser: pastikan menu aktif terlihat.
+  useEffect(() => {
+    const el = nav.current?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (el && nav.current && nav.current.scrollWidth > nav.current.clientWidth) {
+      nav.current.scrollLeft = el.offsetLeft - (nav.current.clientWidth - el.offsetWidth) / 2;
+    }
+  }, [pathname]);
 
   useEffect(() => {
     if (!loading && (!user || role !== "admin")) router.replace(user ? "/403" : "/login?next=/admin");
@@ -46,7 +55,7 @@ export function AdminShell({ name, email, children }: { name: string; email: str
             <ThemeToggle />
           </div>
         </div>
-        <nav aria-label="Menu admin" className="-mb-px flex gap-1 overflow-x-auto px-3 pb-2 lg:flex-1 lg:flex-col lg:overflow-visible lg:px-3 lg:pb-0 lg:pt-2">
+        <nav ref={nav} aria-label="Menu admin" className="relative -mb-px flex gap-1 overflow-x-auto px-3 pb-2 lg:flex-1 lg:flex-col lg:overflow-visible lg:px-3 lg:pb-0 lg:pt-2">
           {NAV.map(({ href, label, icon: Icon, exact }) => {
             const active = isActive(href, exact);
             return (

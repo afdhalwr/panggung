@@ -13,7 +13,12 @@ type Props = {
   height: number;
   categories: SeatCategory[];
   onToggle: (seat: SeatView) => void;
+  /** Kursi mana yang bisa diklik. Bawaan (pembeli): yang tersedia atau sedang dipilih. Admin juga memilih kursi diblokir. */
+  canSelect?: (seat: SeatView) => boolean;
+  ariaLabel?: string;
 };
+
+const buyerSelectable = (s: SeatView) => s.status === "available" || s.status === "selected";
 
 const SIZE = 24;
 const STATUS_LABEL: Record<SeatView["status"], string> = {
@@ -28,7 +33,7 @@ const STATUS_LABEL: Record<SeatView["status"], string> = {
  * Denah kursi SVG. Navigasi keyboard memakai roving tabindex:
  * Tab masuk ke denah, panah berpindah kursi, Enter/Spasi memilih.
  */
-export function SeatMap({ seats, width, height, categories, onToggle }: Props) {
+export function SeatMap({ seats, width, height, categories, onToggle, canSelect = buyerSelectable, ariaLabel }: Props) {
   const catById = useMemo(() => new Map(categories.map((c) => [c.id, c])), [categories]);
   const rows = useMemo(() => {
     const byRow = new Map<string, SeatView[]>();
@@ -74,13 +79,13 @@ export function SeatMap({ seats, width, height, categories, onToggle }: Props) {
 
   function activate(seat: SeatView) {
     setFocusId(seat.id);
-    if (seat.status === "available" || seat.status === "selected") onToggle(seat);
+    if (canSelect(seat)) onToggle(seat);
   }
 
   const minX = Math.min(...seats.map((s) => s.x));
 
   return (
-    <svg viewBox={`0 0 ${width} ${height}`} className="block h-auto w-full select-none" role="group" aria-label="Denah kursi. Gunakan tombol panah untuk berpindah kursi, Enter atau Spasi untuk memilih.">
+    <svg viewBox={`0 0 ${width} ${height}`} className="block h-auto w-full select-none" role="group" aria-label={ariaLabel ?? "Denah kursi. Gunakan tombol panah untuk berpindah kursi, Enter atau Spasi untuk memilih."}>
       <defs>
         <pattern id="held-stripes" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
           <rect width="6" height="6" fill="var(--seat-held)" opacity="0.35" />
@@ -104,6 +109,7 @@ export function SeatMap({ seats, width, height, categories, onToggle }: Props) {
             seat={seat}
             color={cat?.color ?? "var(--seat-available)"}
             label={`Kursi ${seat.id}, ${cat?.name ?? ""}, ${cat ? rupiah(cat.price) : ""}, ${STATUS_LABEL[seat.status]}`}
+            disabled={!canSelect(seat)}
             tabbable={seat.id === activeId}
             focused={hasFocus && seat.id === activeId}
             refCb={(el) => (el ? refs.current.set(seat.id, el) : refs.current.delete(seat.id))}
@@ -125,6 +131,7 @@ type SeatProps = {
   seat: SeatView;
   color: string;
   label: string;
+  disabled: boolean;
   tabbable: boolean;
   focused: boolean;
   refCb: (el: SVGGElement | null) => void;
@@ -134,9 +141,8 @@ type SeatProps = {
   onBlur: () => void;
 };
 
-const Seat = memo(function Seat({ seat, color, label, tabbable, focused, refCb, onKeyDown, onActivate, onFocus, onBlur }: SeatProps) {
+const Seat = memo(function Seat({ seat, color, label, disabled, tabbable, focused, refCb, onKeyDown, onActivate, onFocus, onBlur }: SeatProps) {
   const h = SIZE / 2;
-  const disabled = seat.status === "sold" || seat.status === "held" || seat.status === "blocked";
   return (
     <g
       ref={refCb}

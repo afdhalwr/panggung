@@ -53,7 +53,8 @@ export function MyTickets() {
     );
   }
 
-  const groups = groupByOrder(data.tickets);
+  // Tiket yang direfund tidak lagi berlaku; pesanannya tetap tampil di riwayat dengan status Direfund.
+  const groups = groupByOrder(data.tickets.filter((t) => !t.refundedAt));
   const history = data.orders.filter((o) => o.status !== "paid");
 
   return (

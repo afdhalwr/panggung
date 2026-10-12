@@ -19,7 +19,7 @@ Dokumen ini melengkapi PRD dengan keputusan teknis yang disepakati saat brainsto
 
 ## 2. Ruang lingkup
 
-MVP = F1–F8 dari PRD. F9 (antrean) dan F10 (kursi real-time) dikerjakan setelah gate: tiga skenario E2E di bagian 8 lulus. Di luar scope tetap sama dengan PRD (pembayaran asli, dashboard penyelenggara, artis asli).
+MVP = F1–F8 dari PRD. F9 (antrean) dan F10 (kursi real-time) dikerjakan setelah gate: tiga skenario E2E di bagian 8 lulus. Di luar scope tetap sama dengan PRD (pembayaran asli, artis asli). Dashboard penyelenggara kemudian ditambahkan lewat PRD revisi; desainnya di [2026-10-12-panggung-admin-design.md](2026-10-12-panggung-admin-design.md), termasuk perubahan sumber data event (bagian 4 di bawah) yang kini ada di Firestore.
 
 ## 3. Stack
 

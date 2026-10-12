@@ -8,10 +8,11 @@ import { cn } from "@/lib/utils";
 
 export function TicketCard({ ticket, compact = false }: { ticket: TicketView; compact?: boolean }) {
   const past = new Date(ticket.event.date).getTime() < Date.now();
+  const void_ = !!ticket.refundedAt;
   return (
     <article
       aria-label={`E-ticket ${ticket.event.title}, ${ticket.categoryName}${ticket.seatLabel ? `, kursi ${ticket.seatLabel}` : ""}`}
-      className={cn("relative overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface", past && "opacity-60")}
+      className={cn("relative overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface", (past || void_) && "opacity-60")}
     >
       <div className="relative h-24 overflow-hidden">
         <Poster event={ticket.event} className="absolute inset-0 size-full" showTitle={false} />
@@ -46,10 +47,17 @@ export function TicketCard({ ticket, compact = false }: { ticket: TicketView; co
           <div className="relative -mx-5 border-t border-dashed border-line px-5 pt-5">
             <span className="absolute -left-3 -top-3 size-6 rounded-full bg-base" aria-hidden />
             <span className="absolute -right-3 -top-3 size-6 rounded-full bg-base" aria-hidden />
-            <div className="mx-auto w-fit rounded-2xl bg-white p-3">
-              <QRCodeSVG value={ticket.qrPayload} size={196} level="M" marginSize={0} title={`Kode QR tiket ${ticket.id}`} />
-            </div>
+            {void_ ? (
+              <p role="status" className="rounded-2xl border border-dashed border-line px-4 py-10 text-center text-sm text-muted">
+                Tiket ini sudah direfund dan tidak berlaku lagi.
+              </p>
+            ) : (
+              <div className="mx-auto w-fit rounded-2xl bg-white p-3">
+                <QRCodeSVG value={ticket.qrPayload} size={196} level="M" marginSize={0} title={`Kode QR tiket ${ticket.id}`} />
+              </div>
+            )}
             <p className="mt-3 text-center font-mono text-xs text-muted">{ticket.id}</p>
+            {ticket.usedAt && !void_ && <p className="mt-1 text-center text-sm font-semibold text-success">Sudah dipindai di pintu masuk</p>}
             {ticket.order.buyer && <p className="mt-1 text-center text-sm">Atas nama {ticket.order.buyer.name}</p>}
           </div>
         )}

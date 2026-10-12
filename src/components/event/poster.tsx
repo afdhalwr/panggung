@@ -80,7 +80,9 @@ function Pattern({ kind }: { kind: Event["pattern"] }) {
           <circle cx="220" cy="80" r="40" />
           {Array.from({ length: 12 }, (_, i) => {
             const t = (i / 12) * Math.PI * 2;
-            return <line key={i} x1={220 + Math.cos(t) * 52} y1={80 + Math.sin(t) * 52} x2={220 + Math.cos(t) * 90} y2={80 + Math.sin(t) * 90} />;
+            // Dibulatkan: hasil trigonometri bisa beda di digit terakhir antara server dan browser (hydration mismatch).
+            const r2 = (n: number) => Math.round(n * 100) / 100;
+            return <line key={i} x1={r2(220 + Math.cos(t) * 52)} y1={r2(80 + Math.sin(t) * 52)} x2={r2(220 + Math.cos(t) * 90)} y2={r2(80 + Math.sin(t) * 90)} />;
           })}
         </>
       );

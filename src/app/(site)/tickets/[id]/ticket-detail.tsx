@@ -58,7 +58,9 @@ export function TicketDetail({ id, fresh }: { id: string; fresh: boolean }) {
       <TicketCard ticket={ticket} />
 
       <div className="flex flex-col gap-3">
-        <DownloadPdfButton tickets={siblings} label={siblings.length > 1 ? `Unduh PDF (${siblings.length} tiket)` : "Unduh PDF"} />
+        {!ticket.refundedAt && (
+          <DownloadPdfButton tickets={siblings.filter((t) => !t.refundedAt)} label={siblings.length > 1 ? `Unduh PDF (${siblings.length} tiket)` : "Unduh PDF"} />
+        )}
         <Button asChild variant="secondary" size="lg">
           <Link href="/tickets">Lihat Tiket Saya</Link>
         </Button>

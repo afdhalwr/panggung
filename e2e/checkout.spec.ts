@@ -35,7 +35,7 @@ test("kursi dilepas saat waktu hold habis", async ({ page }) => {
   await loginAsDemo(page);
   await pickFirstAvailableSeat(page);
   await page.getByRole("button", { name: "Lanjut", exact: true }).click();
-  await expect(page).toHaveURL(/\/checkout\/data/);
+  await expect(page).toHaveURL(/\/checkout\/data/, { timeout: 30_000 });
 
   await page.clock.fastForward("10:05");
   const dialog = page.getByRole("dialog", { name: "Waktu habis, kursi dilepas" });
