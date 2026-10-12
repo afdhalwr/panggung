@@ -27,6 +27,11 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
     throw new ApiRequestError(0, "Koneksi terputus. Periksa internet kamu lalu coba lagi.");
   }
   const body = (await res.json().catch(() => ({}))) as T & Partial<ApiError>;
+  if (res.status === 401) {
+    // Sesi di browser sudah tidak diakui server (mis. token basi): keluarkan, supaya semua halaman konsisten.
+    const { signOut } = await import("firebase/auth");
+    await signOut(await getFirebaseAuth()).catch(() => undefined);
+  }
   if (!res.ok) throw new ApiRequestError(res.status, body.error ?? "Terjadi kesalahan.", body.takenSeatIds);
   return body;
 }

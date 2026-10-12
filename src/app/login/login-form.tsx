@@ -4,13 +4,16 @@ import { Sparkles } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useAuthHint } from "@/features/auth/auth-hint";
 import { DEMO_EMAIL, DEMO_PASSWORD, authErrorMessage, useAuth } from "@/features/auth/auth-provider";
 import { cn } from "@/lib/utils";
 
 const input = "h-12 w-full rounded-xl border border-line bg-surface px-4 text-[15px] outline-none focus:border-primary";
 
 export function LoginForm() {
-  const { user, signIn, signUp, signInDemo } = useAuth();
+  const { user, loading, signIn, signUp, signInDemo } = useAuth();
+  const hint = useAuthHint();
   const router = useRouter();
   const next = safeNext(useSearchParams().get("next"));
   const [mode, setMode] = useState<"masuk" | "daftar">("masuk");
@@ -39,6 +42,9 @@ export function LoginForm() {
     const password = String(f.get("password"));
     void run("form", () => (mode === "masuk" ? signIn(email, password) : signUp(String(f.get("name")), email, password)));
   }
+
+  // Sesi tercatat sedang diperiksa (atau sudah login dan akan dialihkan): jangan tampilkan formulir sebentar lalu hilang.
+  if (user || (loading && hint)) return <Skeleton className="h-72 w-full" />;
 
   return (
     <div className="flex flex-col gap-5">

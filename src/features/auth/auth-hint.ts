@@ -1,13 +1,14 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { SESSION_COOKIE } from "./session-cookie";
 
 /**
  * Petunjuk sesi terakhir (nama + email) di localStorage. Dipakai header untuk langsung
  * menampilkan avatar saat halaman dimuat, sebelum Firebase Auth selesai dimuat,
  * supaya tidak ada skeleton yang berkedip. Bukan sumber kebenaran: Firebase tetap yang menentukan.
  */
-export type AuthHint = { name: string; email: string };
+export type AuthHint = { uid: string; name: string; email: string };
 
 const KEY = "panggung-auth-hint";
 const listeners = new Set<() => void>();
@@ -31,6 +32,9 @@ function read(): AuthHint | null {
 }
 
 export function writeAuthHint(hint: AuthHint | null) {
+  document.cookie = hint
+    ? `${SESSION_COOKIE}=1; Path=/; Max-Age=${60 * 60 * 24 * 30}; SameSite=Lax`
+    : `${SESSION_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax`;
   try {
     if (hint) localStorage.setItem(KEY, JSON.stringify(hint));
     else localStorage.removeItem(KEY);

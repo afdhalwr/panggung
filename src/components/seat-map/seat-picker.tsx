@@ -6,6 +6,7 @@ import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { toast } from "sonner";
 import { OrderBar } from "@/components/checkout/order-bar";
 import { useStartHold } from "@/components/checkout/use-start-hold";
+import { useAuthHint } from "@/features/auth/auth-hint";
 import { useAuth } from "@/features/auth/auth-provider";
 import { useCart } from "@/features/cart/store";
 import { useSeatStatus } from "@/features/seats/use-seat-status";
@@ -18,7 +19,10 @@ import { SeatLegend } from "./seat-legend";
 import { SeatMap, type SeatView } from "./seat-map";
 
 export function SeatPicker({ event, venue }: { event: Event; venue: Venue }) {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
+  const hint = useAuthHint();
+  // Selama Auth dimuat, uid dari petunjuk sesi dipakai supaya kursi milik sendiri tidak sempat tampil "ditahan orang lain".
+  const uid = user?.uid ?? (authLoading ? hint?.uid : undefined);
   const { seats: docs, ready, error, now } = useSeatStatus(event.id);
   const cartEvent = useCart((s) => s.eventId);
   const selection = useCart((s) => s.selection);
@@ -40,23 +44,23 @@ export function SeatPicker({ event, venue }: { event: Event; venue: Venue }) {
       seatDefs.map((s) => {
         const doc = docs.get(s.id);
         // Kursi yang sedang ditahan oleh pengguna ini sendiri tetap boleh dipilih ulang.
-        const ownHold = !!user && doc?.status === "held" && doc.uid === user.uid;
+        const ownHold = !!uid && doc?.status === "held" && doc.uid === uid;
         let status: SeatView["status"] = ownHold ? "available" : effectiveSeatStatus(doc, !!s.seedSold, now);
         if (selectedIds.has(s.id) && status === "available") status = "selected";
         return { ...s, status };
       }),
-    [seatDefs, docs, now, selectedIds, user],
+    [seatDefs, docs, now, selectedIds, uid],
   );
 
   // Kursi pilihan yang baru saja diambil orang lain dilepas otomatis.
   const warned = useRef(new Set<string>());
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || authLoading) return;
     const lost = mine
       .filter((i) => i.seatId)
       .filter((i) => {
         const def = seatDefs.find((s) => s.id === i.seatId);
-        return !isSeatAvailable(docs.get(i.seatId!), !!def?.seedSold, now, user?.uid);
+        return !isSeatAvailable(docs.get(i.seatId!), !!def?.seedSold, now, uid);
       })
       .map((i) => i.seatId!);
     if (lost.length) {
@@ -65,7 +69,7 @@ export function SeatPicker({ event, venue }: { event: Event; venue: Venue }) {
       fresh.forEach((id) => warned.current.add(id));
       if (fresh.length) toast.warning(`Kursi ${fresh.join(", ")} baru saja diambil orang lain`, { description: "Sudah kami lepas dari pilihanmu." });
     }
-  }, [ready, docs, now, mine, seatDefs, removeSeats, user]);
+  }, [ready, authLoading, docs, now, mine, seatDefs, removeSeats, uid]);
 
   function onToggle(seat: SeatView) {
     if (toggleSeat(event.id, seat) === "limit") toast.error(`Maksimal ${MAX_PER_ORDER} kursi per pesanan.`);
@@ -90,7 +94,7 @@ export function SeatPicker({ event, venue }: { event: Event; venue: Venue }) {
           </p>
         )}
         <div data-seat-map aria-busy={!ready} className="relative overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
-          {!ready && <div className="absolute inset-0 z-10 animate-pulse bg-surface/60" aria-hidden />}
+          {!ready && <div className="absolute inset-0 z-10 bg-surface/60 [animation:fade-in_200ms_ease-out_250ms_both]" aria-hidden />}
           <TransformWrapper minScale={1} maxScale={4} initialScale={1} centerOnInit doubleClick={{ mode: "zoomIn" }} wheel={{ activationKeys: ["Control", "Meta"] }}>
             {({ zoomIn, zoomOut, resetTransform }) => (
               <>

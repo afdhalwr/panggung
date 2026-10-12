@@ -32,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         unsub = onAuthStateChanged(auth, (u) => {
           setUser(u);
           setLoading(false);
-          writeAuthHint(u ? { name: u.displayName || u.email?.split("@")[0] || "Akun", email: u.email ?? "" } : null);
+          writeAuthHint(u ? { uid: u.uid, name: u.displayName || u.email?.split("@")[0] || "Akun", email: u.email ?? "" } : null);
         });
       });
     // Pengunjung yang pernah login langsung butuh Auth (header, Tiket Saya), jadi dimuat segera.
