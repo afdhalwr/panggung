@@ -20,7 +20,7 @@ export default async function EventsPage({ searchParams }: { searchParams: Promi
         {events.length ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {events.map((e) => (
-              <EventCard key={e.id} event={e} />
+              <EventCard key={e.id} event={e} headingLevel={2} />
             ))}
           </div>
         ) : (

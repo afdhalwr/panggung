@@ -1,6 +1,6 @@
 "use client";
 
-import { firebase } from "@/lib/firebase/client";
+import { getFirebaseAuth } from "@/lib/firebase/auth";
 import type { ApiError, CreateOrderInput, CreateOrderResult, PayOrderInput, PayOrderResult, TicketsResponse } from "@/lib/schemas";
 
 /** Error dari API dengan status HTTP, supaya UI bisa membedakan 409/410/402. */
@@ -15,7 +15,7 @@ export class ApiRequestError extends Error {
 }
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const user = firebase().auth.currentUser;
+  const user = (await getFirebaseAuth()).currentUser;
   if (!user) throw new ApiRequestError(401, "Silakan masuk dulu.");
   let res: Response;
   try {

@@ -3,18 +3,18 @@ import { formatDateLong, formatTime } from "@/lib/format";
 import type { TicketView } from "@/lib/schemas";
 
 const s = StyleSheet.create({
-  page: { backgroundColor: "#0B0B10", color: "#F4F4F6", padding: 36, fontFamily: "Helvetica" },
+  page: { backgroundColor: "#0B0B10", color: "#F4F4F6", padding: 28, fontFamily: "Helvetica" },
   brand: { color: "#C6FF3D", fontSize: 20, fontFamily: "Helvetica-Bold" },
-  card: { marginTop: 24, borderRadius: 16, backgroundColor: "#16161F", padding: 28, borderWidth: 1, borderColor: "#2C2C3A" },
+  card: { marginTop: 14, borderRadius: 16, backgroundColor: "#16161F", padding: 22, borderWidth: 1, borderColor: "#2C2C3A" },
   label: { color: "#A3A3B5", fontSize: 9, textTransform: "uppercase", letterSpacing: 1 },
-  title: { fontSize: 24, fontFamily: "Helvetica-Bold", marginTop: 6 },
-  row: { flexDirection: "row", marginTop: 18, gap: 24 },
+  title: { fontSize: 20, fontFamily: "Helvetica-Bold", marginTop: 6 },
+  row: { flexDirection: "row", marginTop: 12, gap: 20 },
   col: { flex: 1 },
-  value: { fontSize: 12, marginTop: 4 },
-  qrWrap: { marginTop: 28, alignItems: "center" },
-  qr: { width: 200, height: 200, backgroundColor: "#FFFFFF", padding: 10, borderRadius: 12 },
-  code: { marginTop: 10, fontSize: 9, color: "#A3A3B5", fontFamily: "Courier" },
-  note: { marginTop: 24, fontSize: 9, color: "#A3A3B5", lineHeight: 1.5 },
+  value: { fontSize: 11, marginTop: 3 },
+  qrWrap: { marginTop: 18, alignItems: "center" },
+  qr: { width: 150, height: 150, backgroundColor: "#FFFFFF", padding: 8, borderRadius: 10 },
+  code: { marginTop: 8, fontSize: 9, color: "#A3A3B5", fontFamily: "Courier" },
+  note: { marginTop: 14, fontSize: 8, color: "#A3A3B5", lineHeight: 1.4 },
 });
 
 /** E-ticket PDF, satu halaman per tiket. Gambar QR dikirim sebagai data URL PNG. */
@@ -22,7 +22,7 @@ export function TicketPdf({ tickets, qrs }: { tickets: TicketView[]; qrs: Record
   return (
     <Document title={`E-ticket ${tickets[0]?.event.title ?? ""}`} author="Panggung">
       {tickets.map((t) => (
-        <Page key={t.id} size="A5" style={s.page}>
+        <Page key={t.id} size="A5" style={s.page} wrap={false}>
           <Text style={s.brand}>panggung</Text>
           <View style={s.card}>
             <Text style={s.label}>E-ticket</Text>

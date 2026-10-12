@@ -2,7 +2,7 @@
 
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { firebase } from "@/lib/firebase/client";
+import { firestore } from "@/lib/firebase/firestore";
 import type { InventoryDoc, SeatDoc } from "@/lib/schemas";
 
 /** Dengarkan status kursi dan kuota festival suatu event secara real-time. */
@@ -14,7 +14,7 @@ export function useSeatStatus(eventId: string) {
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
-    const { db } = firebase();
+    const db = firestore();
     const unsubSeats = onSnapshot(
       query(collection(db, "seats"), where("eventId", "==", eventId)),
       (snap) => {

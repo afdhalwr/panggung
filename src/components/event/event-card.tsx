@@ -5,7 +5,8 @@ import { availabilityLabel } from "@/lib/rules";
 import { GENRE_LABEL, type Event } from "@/lib/schemas";
 import { Poster } from "./poster";
 
-export function EventCard({ event }: { event: Event }) {
+export function EventCard({ event, headingLevel = 3 }: { event: Event; headingLevel?: 2 | 3 }) {
+  const Heading = headingLevel === 2 ? "h2" : "h3";
   const venue = getVenue(event.venueId);
   const soldOut = event.categories.every((c) => availabilityLabel(c) === "Habis");
   const almost = !soldOut && event.categories.some((c) => availabilityLabel(c) === "Hampir habis");
@@ -27,7 +28,7 @@ export function EventCard({ event }: { event: Event }) {
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">
           {GENRE_LABEL[event.genre]} · {event.city}
         </p>
-        <h3 className="font-display text-xl font-semibold leading-tight">{event.title}</h3>
+        <Heading className="font-display text-xl font-semibold leading-tight">{event.title}</Heading>
         <p className="text-sm text-muted">
           {formatDate(event.date)} · {venue?.name}
         </p>

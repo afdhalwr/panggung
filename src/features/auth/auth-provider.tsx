@@ -1,15 +1,8 @@
 "use client";
 
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut as fbSignOut,
-  updateProfile,
-  type User,
-} from "firebase/auth";
+import type { User } from "firebase/auth";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { firebase } from "@/lib/firebase/client";
+import { getFirebaseAuth } from "@/lib/firebase/auth";
 
 export const DEMO_EMAIL = "demo@panggung.id";
 export const DEMO_PASSWORD = "demo1234";
@@ -30,18 +23,36 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    return onAuthStateChanged(firebase().auth, (u) => {
-      setUser(u);
-      setLoading(false);
-    });
+    let unsub: (() => void) | undefined;
+    let cancelled = false;
+    const start = () =>
+      void Promise.all([getFirebaseAuth(), import("firebase/auth")]).then(([auth, { onAuthStateChanged }]) => {
+        if (cancelled) return;
+        unsub = onAuthStateChanged(auth, (u) => {
+          setUser(u);
+          setLoading(false);
+        });
+      });
+    // Tunggu browser senggang agar render awal (dan LCP) tidak berebut dengan pemuatan SDK.
+    // Safari lama belum punya requestIdleCallback.
+    const hasIdle = typeof window.requestIdleCallback === "function";
+    const handle = hasIdle ? window.requestIdleCallback(start, { timeout: 1500 }) : setTimeout(start, 200);
+    return () => {
+      cancelled = true;
+      if (hasIdle) window.cancelIdleCallback(handle as number);
+      else clearTimeout(handle);
+      unsub?.();
+    };
   }, []);
 
   const signIn = useCallback(async (email: string, password: string) => {
-    await signInWithEmailAndPassword(firebase().auth, email, password);
+    const [auth, { signInWithEmailAndPassword }] = await Promise.all([getFirebaseAuth(), import("firebase/auth")]);
+    await signInWithEmailAndPassword(auth, email, password);
   }, []);
 
   const signUp = useCallback(async (name: string, email: string, password: string) => {
-    const cred = await createUserWithEmailAndPassword(firebase().auth, email, password);
+    const [auth, { createUserWithEmailAndPassword, updateProfile }] = await Promise.all([getFirebaseAuth(), import("firebase/auth")]);
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
     await updateProfile(cred.user, { displayName: name });
     setUser({ ...cred.user, displayName: name } as User);
   }, []);
@@ -49,7 +60,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signInDemo = useCallback(() => signIn(DEMO_EMAIL, DEMO_PASSWORD), [signIn]);
 
   const signOut = useCallback(async () => {
-    await fbSignOut(firebase().auth);
+    const [auth, { signOut: fbSignOut }] = await Promise.all([getFirebaseAuth(), import("firebase/auth")]);
+    await fbSignOut(auth);
   }, []);
 
   const value = useMemo(

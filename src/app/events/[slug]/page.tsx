@@ -64,12 +64,12 @@ export default async function EventPage({ params }: Params) {
             </p>
             <h1 className="mt-1 font-display text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">{event.title}</h1>
           </div>
-          <dl className="grid gap-3 text-[15px] sm:grid-cols-2">
+          <ul className="grid gap-3 text-[15px] sm:grid-cols-2" aria-label="Info konser">
             <Info icon={<CalendarDays />} label="Tanggal" value={formatDateLong(event.date)} />
             <Info icon={<Clock />} label="Waktu" value={formatTime(event.date)} />
             <Info icon={<MapPin />} label="Venue" value={`${venue?.name}`} sub={venue?.address} />
             <Info icon={<Music2 />} label="Genre" value={GENRE_LABEL[event.genre]} />
-          </dl>
+          </ul>
           <section aria-labelledby="tentang">
             <h2 id="tentang" className="mb-2 font-display text-2xl font-bold">
               Tentang konser
@@ -152,15 +152,15 @@ function BuyButton({ slug, enabled, label }: { slug: string; enabled: boolean; l
 
 function Info({ icon, label, value, sub }: { icon: React.ReactNode; label: string; value: string; sub?: string }) {
   return (
-    <div className="flex gap-3 rounded-2xl border border-line bg-surface p-4 [&_svg]:size-5 [&_svg]:text-primary">
+    <li className="flex gap-3 rounded-2xl border border-line bg-surface p-4 [&_svg]:size-5 [&_svg]:text-primary">
       <span className="mt-0.5" aria-hidden>
         {icon}
       </span>
       <div>
-        <dt className="text-xs font-semibold uppercase tracking-wide text-muted">{label}</dt>
-        <dd className="font-semibold">{value}</dd>
-        {sub && <dd className="text-sm text-muted">{sub}</dd>}
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted">{label}</p>
+        <p className="font-semibold">{value}</p>
+        {sub && <p className="text-sm text-muted">{sub}</p>}
       </div>
-    </div>
+    </li>
   );
 }
