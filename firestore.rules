@@ -1,0 +1,28 @@
+rules_version = '2';
+
+// Semua penulisan hanya lewat Route Handler (Firebase Admin SDK melewati rules ini).
+// Browser hanya boleh membaca: status kursi dan kuota untuk semua orang,
+// order dan tiket hanya untuk pemiliknya.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /seats/{seatId} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /inventory/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /orders/{orderId} {
+      allow read: if request.auth != null && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+    match /tickets/{ticketId} {
+      allow read: if request.auth != null && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

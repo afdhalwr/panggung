@@ -151,13 +151,17 @@ export const PAYMENT_LABEL: Record<PaymentMethod, string> = {
 export const orderItemSchema = z.object({
   categoryId: z.string().min(1),
   seatId: z.string().min(1).optional(),
-  qty: z.number().int().min(1).max(MAX_PER_ORDER),
+  qty: z
+    .number()
+    .int()
+    .min(1, "Minimal 1 tiket.")
+    .max(MAX_PER_ORDER, `Maksimal ${MAX_PER_ORDER} tiket per pesanan.`),
 });
 
 export const createOrderSchema = z
   .object({
     eventId: z.string().min(1),
-    items: z.array(orderItemSchema).min(1).max(MAX_PER_ORDER),
+    items: z.array(orderItemSchema).min(1, "Pilih minimal 1 tiket.").max(MAX_PER_ORDER, `Maksimal ${MAX_PER_ORDER} tiket per pesanan.`),
   })
   .refine((o) => o.items.reduce((n, i) => n + i.qty, 0) <= MAX_PER_ORDER, {
     message: `Maksimal ${MAX_PER_ORDER} tiket per pesanan.`,
