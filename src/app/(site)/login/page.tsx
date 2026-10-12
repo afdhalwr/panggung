@@ -9,7 +9,7 @@ export default function LoginPage() {
     <div className="mx-auto flex max-w-md flex-col gap-6 px-4 py-12">
       <div>
         <h1 className="font-display text-4xl font-extrabold tracking-tight">Masuk ke Panggung</h1>
-        <p className="mt-2 text-muted">Masuk untuk memesan tiket dan melihat e-ticket kamu.</p>
+        <p className="mt-2 text-muted">Masuk untuk memesan tiket dan melihat e-ticket kamu, atau kelola event sebagai admin.</p>
       </div>
       <Suspense>
         <LoginForm />

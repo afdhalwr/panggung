@@ -1,20 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { LogOut, Ticket } from "lucide-react";
+import { LayoutDashboard, LogOut, Ticket, UserRound } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuthHint } from "./auth-hint";
 import { useAuth } from "./auth-provider";
 
 export function AccountButton() {
-  const { user, loading, signOut } = useAuth();
+  const { user, role, loading, signOut } = useAuth();
   const hint = useAuthHint();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
 
   // Selama Firebase Auth belum siap, pakai petunjuk sesi terakhir agar header tidak berkedip.
   const account = user
-    ? { name: user.displayName || user.email?.split("@")[0] || "Akun", email: user.email ?? "" }
+    ? { name: user.displayName || user.email?.split("@")[0] || "Akun", email: user.email ?? "", role: role ?? "user" }
     : loading
       ? hint
       : null;
@@ -31,6 +33,8 @@ export function AccountButton() {
   }
 
   const { name, email } = account;
+  const isAdmin = account.role === "admin";
+  const item = "pressable flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-elevated";
   return (
     <div className="relative">
       <button
@@ -49,23 +53,28 @@ export function AccountButton() {
           className="absolute right-0 top-12 w-56 origin-top-right overflow-hidden rounded-2xl border border-line bg-surface p-1.5 shadow-xl [animation:menu-in_160ms_var(--ease-spring)]"
           onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
         >
-          <p className="truncate px-3 py-2 text-sm text-muted">{email}</p>
-          <Link
-            role="menuitem"
-            href="/tickets"
-            onClick={() => setOpen(false)}
-            className="pressable flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-elevated"
-          >
-            <Ticket className="size-4" /> Tiket Saya
+          <p className="truncate px-3 pt-2 text-sm text-muted">{email}</p>
+          <p className="px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-primary">{isAdmin ? "Admin" : "Pengguna"}</p>
+          {isAdmin ? (
+            <Link role="menuitem" href="/admin" onClick={() => setOpen(false)} className={item}>
+              <LayoutDashboard className="size-4" /> Dashboard
+            </Link>
+          ) : (
+            <Link role="menuitem" href="/tickets" onClick={() => setOpen(false)} className={item}>
+              <Ticket className="size-4" /> Tiket Saya
+            </Link>
+          )}
+          <Link role="menuitem" href="/profile" onClick={() => setOpen(false)} className={item}>
+            <UserRound className="size-4" /> Profil
           </Link>
           <button
             role="menuitem"
             type="button"
             onClick={() => {
               setOpen(false);
-              void signOut();
+              void signOut().then(() => router.refresh());
             }}
-            className="pressable flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-elevated"
+            className={`${item} w-full`}
           >
             <LogOut className="size-4" /> Keluar
           </button>

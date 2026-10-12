@@ -20,6 +20,8 @@
   --seat-sold: #3a3a48;
   --status-success: #3ddc97;
   --status-danger: #ff5c5c;
+  /* Warna batang grafik dashboard; divalidasi terhadap --bg-surface (lightness band + kontras 3:1). */
+  --chart-1: #76a312;
   color-scheme: dark;
 }
 
@@ -39,6 +41,7 @@
   --seat-sold: #c4c4cc;
   --status-success: #11845b;
   --status-danger: #c62828;
+  --chart-1: #4d7a00;
   color-scheme: light;
 }
 
@@ -58,6 +61,7 @@
   --color-seat-sold: var(--seat-sold);
   --color-success: var(--status-success);
   --color-danger: var(--status-danger);
+  --color-chart-1: var(--chart-1);
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-bricolage), var(--font-jakarta), ui-sans-serif, sans-serif;
   --radius-card: 20px;

@@ -1,10 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Suspense } from "react";
-import { SiteFooter } from "@/components/site-footer";
 import { NavigationProgress } from "@/components/motion/navigation-progress";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
-import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -53,11 +51,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <a href="#konten" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-on-primary">
             Lewati ke konten
           </a>
-          <SiteHeader />
-          <main id="konten" className="flex-1">
-            {children}
-          </main>
-          <SiteFooter />
+          {/* Header, footer, dan <main id="konten"> ada di layout (site) dan admin masing-masing. */}
+          {children}
         </Providers>
       </body>
     </html>

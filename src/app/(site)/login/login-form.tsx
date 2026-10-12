@@ -1,30 +1,46 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
+import { ShieldCheck, Sparkles } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuthHint } from "@/features/auth/auth-hint";
-import { DEMO_EMAIL, DEMO_PASSWORD, authErrorMessage, useAuth } from "@/features/auth/auth-provider";
+import { authErrorMessage, useAuth } from "@/features/auth/auth-provider";
+import { DEMO_ACCOUNTS } from "@/features/auth/demo-accounts";
+import { allowedFor, homeFor, type Role } from "@/features/auth/session-cookie";
 import { cn } from "@/lib/utils";
 
 const input = "h-12 w-full rounded-xl border border-line bg-surface px-4 text-[15px] outline-none focus:border-primary";
 
+type Busy = "form" | "user" | "admin" | null;
+
 export function LoginForm() {
-  const { user, loading, signIn, signUp, signInDemo } = useAuth();
+  const { user, loading, notice, signIn, signUp, signInDemo, ensureSession } = useAuth();
   const hint = useAuthHint();
   const router = useRouter();
   const next = safeNext(useSearchParams().get("next"));
   const [mode, setMode] = useState<"masuk" | "daftar">("masuk");
   const [error, setError] = useState("");
-  const [busy, setBusy] = useState<"form" | "demo" | null>(null);
+  const [busy, setBusy] = useState<Busy>(null);
+
+  // Sudah masuk: pastikan session cookie ada di server dulu (halaman admin memverifikasinya), baru pindah halaman.
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    void ensureSession().then((role) => {
+      if (!cancelled && role) router.replace(destination(role, next));
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [user, next, router, ensureSession]);
 
   useEffect(() => {
-    if (user) router.replace(next);
-  }, [user, next, router]);
+    if (notice) setBusy(null);
+  }, [notice]);
 
-  async function run(kind: "form" | "demo", fn: () => Promise<void>) {
+  async function run(kind: Exclude<Busy, null>, fn: () => Promise<void>) {
     setError("");
     setBusy(kind);
     try {
@@ -46,17 +62,24 @@ export function LoginForm() {
   // Sesi tercatat sedang diperiksa (atau sudah login dan akan dialihkan): jangan tampilkan formulir sebentar lalu hilang.
   if (user || (loading && hint)) return <Skeleton className="h-72 w-full" />;
 
+  const message = error || notice;
+
   return (
     <div className="flex flex-col gap-5">
       <div className="rounded-[var(--radius-card)] border border-primary/40 bg-primary/10 p-5">
         <p className="font-semibold">Mau langsung coba?</p>
         <p className="mt-1 text-sm text-muted">
-          Akun demo sudah punya riwayat tiket. Email <code className="text-fg">{DEMO_EMAIL}</code>, sandi{" "}
-          <code className="text-fg">{DEMO_PASSWORD}</code>.
+          Akun pengguna sudah punya riwayat tiket; akun admin membuka dashboard penyelenggara. Kata sandinya{" "}
+          <code className="text-fg">{DEMO_ACCOUNTS.user.password}</code> dan <code className="text-fg">{DEMO_ACCOUNTS.admin.password}</code>.
         </p>
-        <Button className="mt-4 w-full" onClick={() => void run("demo", signInDemo)} disabled={busy !== null}>
-          <Sparkles /> {busy === "demo" ? "Masuk…" : "Masuk sebagai demo"}
-        </Button>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          <Button onClick={() => void run("user", () => signInDemo("user"))} disabled={busy !== null}>
+            <Sparkles /> {busy === "user" ? "Masuk…" : "Masuk sebagai Pengguna"}
+          </Button>
+          <Button variant="secondary" onClick={() => void run("admin", () => signInDemo("admin"))} disabled={busy !== null}>
+            <ShieldCheck /> {busy === "admin" ? "Masuk…" : "Masuk sebagai Admin"}
+          </Button>
+        </div>
       </div>
 
       <div className="flex rounded-full border border-line bg-surface p-1" role="tablist" aria-label="Pilih masuk atau daftar">
@@ -99,9 +122,9 @@ export function LoginForm() {
             className={input}
           />
         </label>
-        {error && (
+        {message && (
           <p role="alert" className="rounded-xl bg-danger/10 px-4 py-3 text-sm text-danger">
-            {error}
+            {message}
           </p>
         )}
         <Button type="submit" variant="secondary" size="lg" disabled={busy !== null}>
@@ -113,6 +136,11 @@ export function LoginForm() {
 }
 
 // Hanya izinkan redirect ke path internal agar tidak bisa dipakai untuk open redirect.
-function safeNext(next: string | null): string {
-  return next && next.startsWith("/") && !next.startsWith("//") ? next : "/tickets";
+function safeNext(next: string | null): string | null {
+  return next && next.startsWith("/") && !next.startsWith("//") && !next.startsWith("/login") ? next : null;
+}
+
+/** Tujuan setelah masuk: `next` bila halaman itu memang untuk peran ini, selain itu halaman awal peran. */
+function destination(role: Role, next: string | null): string {
+  return next && allowedFor(role, next.split("?")[0]!) ? next : homeFor(role);
 }

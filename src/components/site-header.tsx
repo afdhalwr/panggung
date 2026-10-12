@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AccountButton } from "@/features/auth/account-button";
+import { RoleNavLink } from "@/features/auth/role-nav-link";
 import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader() {
@@ -13,9 +14,7 @@ export function SiteHeader() {
           <Link href="/events" className="pressable rounded-full px-3 py-2 text-sm font-medium text-muted hover:bg-elevated hover:text-fg">
             Konser
           </Link>
-          <Link href="/tickets" className="pressable rounded-full px-3 py-2 text-sm font-medium text-muted hover:bg-elevated hover:text-fg">
-            Tiket Saya
-          </Link>
+          <RoleNavLink className="pressable rounded-full px-3 py-2 text-sm font-medium text-muted hover:bg-elevated hover:text-fg" />
         </nav>
         <div className="ml-auto flex items-center gap-1">
           <ThemeToggle />

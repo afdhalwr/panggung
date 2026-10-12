@@ -16,12 +16,23 @@ try {
 process.env.TICKET_QR_SECRET ??= "dev-secret-panggung-lokal";
 
 const DEMO = { email: "demo@panggung.id", password: "demo1234", displayName: "Nadia (Demo)" };
+const ADMIN = { email: "admin@panggung.id", password: "admin1234", displayName: "Sinta (Admin)" };
 const buyer = { name: "Nadia Putri", email: DEMO.email, phone: "081234567890" };
 
-async function main() {
+/** Buat akun bila belum ada, lalu kembalikan sandi dan status aktifnya (bila sempat diubah pengunjung demo). */
+async function upsertAccount(acc: typeof DEMO) {
   const auth = adminAuth();
-  const user = await auth.getUserByEmail(DEMO.email).catch(() => auth.createUser(DEMO));
-  console.log(`Akun demo: ${DEMO.email} / ${DEMO.password} (uid ${user.uid})`);
+  const existing = await auth.getUserByEmail(acc.email).catch(() => null);
+  if (!existing) return auth.createUser(acc);
+  return auth.updateUser(existing.uid, { password: acc.password, disabled: false, displayName: acc.displayName });
+}
+
+async function main() {
+  const user = await upsertAccount(DEMO);
+  console.log(`Akun demo pengguna: ${DEMO.email} / ${DEMO.password} (uid ${user.uid})`);
+  const admin = await upsertAccount(ADMIN);
+  await adminAuth().setCustomUserClaims(admin.uid, { role: "admin" });
+  console.log(`Akun demo admin: ${ADMIN.email} / ${ADMIN.password} (uid ${admin.uid})`);
 
   const paid = await adminDb().collection("orders").where("uid", "==", user.uid).where("status", "==", "paid").get();
   if (!paid.empty) {
