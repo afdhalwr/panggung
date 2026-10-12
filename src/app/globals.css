@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@custom-variant light (&:where(.light, .light *));
+
+/* Token warna, sama dengan variables Figma "Warna Gelap" / "Warna Terang". */
+:root {
+  --bg-base: #0b0b10;
+  --bg-surface: #16161f;
+  --bg-elevated: #20202c;
+  --border-default: #2c2c3a;
+  --text-primary: #f4f4f6;
+  --text-muted: #a3a3b5;
+  --brand-primary: #c6ff3d;
+  --brand-on-primary: #0b0b10;
+  --brand-accent: #ff3d8b;
+  --seat-available: #7c7cf5;
+  --seat-selected: #c6ff3d;
+  --seat-held: #f5a524;
+  --seat-sold: #3a3a48;
+  --status-success: #3ddc97;
+  --status-danger: #ff5c5c;
+  color-scheme: dark;
+}
+
+.light {
+  --bg-base: #f7f7f2;
+  --bg-surface: #ffffff;
+  --bg-elevated: #eeeee6;
+  --border-default: #dadad0;
+  --text-primary: #111116;
+  --text-muted: #55556a;
+  --brand-primary: #4d7a00;
+  --brand-on-primary: #ffffff;
+  --brand-accent: #c2185b;
+  --seat-available: #4f4fd9;
+  --seat-selected: #4d7a00;
+  --seat-held: #b26b00;
+  --seat-sold: #c4c4cc;
+  --status-success: #11845b;
+  --status-danger: #c62828;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-base: var(--bg-base);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-line: var(--border-default);
+  --color-fg: var(--text-primary);
+  --color-muted: var(--text-muted);
+  --color-primary: var(--brand-primary);
+  --color-on-primary: var(--brand-on-primary);
+  --color-accent: var(--brand-accent);
+  --color-seat-available: var(--seat-available);
+  --color-seat-selected: var(--seat-selected);
+  --color-seat-held: var(--seat-held);
+  --color-seat-sold: var(--seat-sold);
+  --color-success: var(--status-success);
+  --color-danger: var(--status-danger);
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-jakarta), ui-sans-serif, sans-serif;
+  --radius-card: 20px;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
