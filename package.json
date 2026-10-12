@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "emulators": "firebase emulators:start --only auth,firestore --project demo-panggung",
+    "emulators": "node scripts/emulators.mjs",
     "seed:demo": "tsx --conditions=react-server scripts/seed-demo.ts",
     "e2e": "playwright test",
     "e2e:ci": "firebase emulators:exec --only auth,firestore --project demo-panggung \"npm run seed:demo && playwright test\""

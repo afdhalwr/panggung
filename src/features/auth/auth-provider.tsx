@@ -3,6 +3,7 @@
 import type { User } from "firebase/auth";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { getFirebaseAuth } from "@/lib/firebase/auth";
+import { hasAuthHint, writeAuthHint } from "./auth-hint";
 
 export const DEMO_EMAIL = "demo@panggung.id";
 export const DEMO_PASSWORD = "demo1234";
@@ -31,12 +32,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         unsub = onAuthStateChanged(auth, (u) => {
           setUser(u);
           setLoading(false);
+          writeAuthHint(u ? { name: u.displayName || u.email?.split("@")[0] || "Akun", email: u.email ?? "" } : null);
         });
       });
-    // Tunggu browser senggang agar render awal (dan LCP) tidak berebut dengan pemuatan SDK.
+    // Pengunjung yang pernah login langsung butuh Auth (header, Tiket Saya), jadi dimuat segera.
+    // Pengunjung baru menunggu browser senggang agar render awal (dan LCP) tidak berebut dengan SDK.
     // Safari lama belum punya requestIdleCallback.
-    const hasIdle = typeof window.requestIdleCallback === "function";
-    const handle = hasIdle ? window.requestIdleCallback(start, { timeout: 1500 }) : setTimeout(start, 200);
+    const hasIdle = !hasAuthHint() && typeof window.requestIdleCallback === "function";
+    const handle = hasIdle ? window.requestIdleCallback(start, { timeout: 1500 }) : setTimeout(start, 0);
     return () => {
       cancelled = true;
       if (hasIdle) window.cancelIdleCallback(handle as number);

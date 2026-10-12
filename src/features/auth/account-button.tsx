@@ -4,15 +4,25 @@ import Link from "next/link";
 import { LogOut, Ticket } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useAuthHint } from "./auth-hint";
 import { useAuth } from "./auth-provider";
 
 export function AccountButton() {
   const { user, loading, signOut } = useAuth();
+  const hint = useAuthHint();
   const [open, setOpen] = useState(false);
 
-  if (loading) return <div className="h-9 w-20 animate-pulse rounded-full bg-elevated" aria-hidden />;
+  // Selama Firebase Auth belum siap, pakai petunjuk sesi terakhir agar header tidak berkedip.
+  const account = user
+    ? { name: user.displayName || user.email?.split("@")[0] || "Akun", email: user.email ?? "" }
+    : loading
+      ? hint
+      : null;
 
-  if (!user) {
+  // Saat render server/hydration status belum diketahui: placeholder tak terlihat, bukan skeleton berdenyut.
+  if (account === undefined) return <div className="size-10" aria-hidden />;
+
+  if (!account) {
     return (
       <Button asChild size="sm" variant="secondary">
         <Link href="/login">Masuk</Link>
@@ -20,7 +30,7 @@ export function AccountButton() {
     );
   }
 
-  const name = user.displayName || user.email?.split("@")[0] || "Akun";
+  const { name, email } = account;
   return (
     <div className="relative">
       <button
@@ -39,7 +49,7 @@ export function AccountButton() {
           className="absolute right-0 top-12 w-56 overflow-hidden rounded-2xl border border-line bg-surface p-1.5 shadow-xl"
           onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
         >
-          <p className="truncate px-3 py-2 text-sm text-muted">{user.email}</p>
+          <p className="truncate px-3 py-2 text-sm text-muted">{email}</p>
           <Link
             role="menuitem"
             href="/tickets"
