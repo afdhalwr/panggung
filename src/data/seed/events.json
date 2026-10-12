@@ -1,0 +1,259 @@
+[
+  {
+    "id": "evt-senja-ruah",
+    "slug": "senja-ruah-tur-pulang",
+    "title": "Senja Ruah: Tur Pulang",
+    "artist": "Senja Ruah",
+    "genre": "indie",
+    "city": "Jakarta",
+    "venueId": "teater-nusantara",
+    "date": "2026-11-14T12:00:00.000Z",
+    "salesOpenAt": "2026-09-01T03:00:00.000Z",
+    "description": "Setelah tiga tahun berkelana, Senja Ruah pulang ke Jakarta membawa album keempat mereka. Malam yang intim di gedung teater, dengan aransemen string kuartet dan lagu-lagu lama yang dibawakan ulang.",
+    "lineup": ["Senja Ruah", "Kuartet Gesek Halimun", "Rinai (pembuka)"],
+    "palette": ["#FF3D8B", "#4B2EE6"],
+    "pattern": "rings",
+    "photo": "/photos/crowd-1.webp",
+    "featured": true,
+    "popularity": 98,
+    "categories": [
+      { "id": "vip", "name": "VIP", "price": 1500000, "type": "seated", "quota": 0, "sold": 0, "perks": "Baris A–D, merchandise eksklusif" },
+      { "id": "gold", "name": "Gold", "price": 850000, "type": "seated", "quota": 0, "sold": 0 },
+      { "id": "silver", "name": "Silver", "price": 450000, "type": "seated", "quota": 0, "sold": 0 }
+    ]
+  },
+  {
+    "id": "evt-gelombang-elektrik",
+    "slug": "gelombang-elektrik-2026",
+    "title": "Gelombang Elektrik 2026",
+    "artist": "DJ Arunika",
+    "genre": "edm",
+    "city": "Jakarta",
+    "venueId": "taman-kota-raya",
+    "date": "2026-12-05T13:00:00.000Z",
+    "salesOpenAt": "2026-09-15T03:00:00.000Z",
+    "description": "Festival musik elektronik semalam suntuk dengan tiga panggung, tata cahaya laser, dan deretan DJ lokal yang sedang naik daun.",
+    "lineup": ["DJ Arunika", "Kalibrasi", "Neon Sabana", "Mesin Waktu"],
+    "palette": ["#C6FF3D", "#0E7C86"],
+    "pattern": "grid",
+    "photo": "/photos/crowd-2.webp",
+    "featured": true,
+    "popularity": 95,
+    "categories": [
+      { "id": "festival", "name": "Festival", "price": 550000, "type": "festival", "quota": 6000, "sold": 5480 },
+      { "id": "vip-deck", "name": "VIP Deck", "price": 1250000, "type": "festival", "quota": 400, "sold": 371, "perks": "Area panggung atas dan bar khusus" }
+    ]
+  },
+  {
+    "id": "evt-orkes-bulan",
+    "slug": "orkes-bulan-purnama",
+    "title": "Orkes Bulan Purnama",
+    "artist": "Orkes Bulan",
+    "genre": "jazz",
+    "city": "Jakarta",
+    "venueId": "teater-nusantara",
+    "date": "2027-01-23T12:30:00.000Z",
+    "salesOpenAt": "2026-10-01T03:00:00.000Z",
+    "description": "Big band jazz dengan 18 pemain membawakan standar jazz dan lagu daerah Nusantara dalam aransemen swing.",
+    "lineup": ["Orkes Bulan", "Dara Kirana (vokal)"],
+    "palette": ["#F5A524", "#3B1E54"],
+    "pattern": "sun",
+    "photo": "/photos/stage-1.webp",
+    "popularity": 71,
+    "categories": [
+      { "id": "vip", "name": "VIP", "price": 1200000, "type": "seated", "quota": 0, "sold": 0 },
+      { "id": "gold", "name": "Gold", "price": 700000, "type": "seated", "quota": 0, "sold": 0 },
+      { "id": "silver", "name": "Silver", "price": 350000, "type": "seated", "quota": 0, "sold": 0 }
+    ]
+  },
+  {
+    "id": "evt-badai-pasir",
+    "slug": "badai-pasir-live",
+    "title": "Badai Pasir Live",
+    "artist": "Badai Pasir",
+    "genre": "rock",
+    "city": "Bandung",
+    "venueId": "balai-sora",
+    "date": "2026-11-28T12:00:00.000Z",
+    "salesOpenAt": "2026-09-10T03:00:00.000Z",
+    "description": "Band rock asal Bandung merayakan 15 tahun berkarya. Distorsi tebal, moshpit, dan lagu-lagu wajib yang bikin serak.",
+    "lineup": ["Badai Pasir", "Karat", "Hantu Kopi"],
+    "palette": ["#FF5C5C", "#1A1A2E"],
+    "pattern": "bars",
+    "photo": "/photos/crowd-3.webp",
+    "featured": true,
+    "popularity": 88,
+    "categories": [
+      { "id": "festival", "name": "Festival", "price": 300000, "type": "festival", "quota": 2500, "sold": 1900 },
+      { "id": "tribun", "name": "Tribun", "price": 450000, "type": "festival", "quota": 500, "sold": 500 }
+    ]
+  },
+  {
+    "id": "evt-laut-kaca",
+    "slug": "laut-kaca-akustik",
+    "title": "Laut Kaca: Sesi Akustik",
+    "artist": "Laut Kaca",
+    "genre": "pop",
+    "city": "Surabaya",
+    "venueId": "hall-pelabuhan",
+    "date": "2026-12-12T12:00:00.000Z",
+    "salesOpenAt": "2026-09-20T03:00:00.000Z",
+    "description": "Duo pop Laut Kaca membawakan lagu-lagu hits mereka dalam format akustik, lengkap dengan sesi tanya jawab bersama penonton.",
+    "lineup": ["Laut Kaca", "Gema Sore"],
+    "palette": ["#7C7CF5", "#0B3D91"],
+    "pattern": "waves",
+    "photo": "/photos/stage-2.webp",
+    "popularity": 76,
+    "categories": [
+      { "id": "festival", "name": "Festival", "price": 275000, "type": "festival", "quota": 3500, "sold": 1200 },
+      { "id": "vip", "name": "VIP", "price": 650000, "type": "festival", "quota": 300, "sold": 120, "perks": "Meet & greet dan foto bersama" }
+    ]
+  },
+  {
+    "id": "evt-sore-tugu",
+    "slug": "sore-di-tugu-fest",
+    "title": "Sore di Tugu Fest",
+    "artist": "Berbagai Artis",
+    "genre": "indie",
+    "city": "Yogyakarta",
+    "venueId": "alun-alun-selatan",
+    "date": "2027-02-06T09:00:00.000Z",
+    "salesOpenAt": "2026-10-05T03:00:00.000Z",
+    "description": "Festival indie dua hari di lapangan terbuka: musik, pasar kreatif, dan jajanan khas Jogja dari sore sampai tengah malam.",
+    "lineup": ["Kidung Lintang", "Payung Kertas", "Teras Belakang", "Sinar Jingga", "Wayang Elektrik"],
+    "palette": ["#3DDC97", "#5C2A9D"],
+    "pattern": "sun",
+    "photo": "/photos/crowd-4.webp",
+    "featured": true,
+    "popularity": 90,
+    "categories": [
+      { "id": "harian", "name": "Tiket Harian", "price": 200000, "type": "festival", "quota": 8000, "sold": 3100 },
+      { "id": "terusan", "name": "Tiket Terusan 2 Hari", "price": 350000, "type": "festival", "quota": 2000, "sold": 1650 }
+    ]
+  },
+  {
+    "id": "evt-nada-deli",
+    "slug": "nada-deli-pop-night",
+    "title": "Nada Deli Pop Night",
+    "artist": "Sekar Wangi",
+    "genre": "pop",
+    "city": "Medan",
+    "venueId": "gedung-deli",
+    "date": "2027-01-16T12:00:00.000Z",
+    "salesOpenAt": "2026-10-10T03:00:00.000Z",
+    "description": "Penyanyi pop Sekar Wangi menyapa Medan untuk pertama kalinya, dengan band lengkap dan penari latar.",
+    "lineup": ["Sekar Wangi", "Toba Swara"],
+    "palette": ["#FF3D8B", "#F5A524"],
+    "pattern": "rings",
+    "photo": "/photos/stage-1.webp",
+    "popularity": 64,
+    "categories": [
+      { "id": "festival", "name": "Festival", "price": 325000, "type": "festival", "quota": 3000, "sold": 640 },
+      { "id": "vip", "name": "VIP", "price": 750000, "type": "festival", "quota": 300, "sold": 80 }
+    ]
+  },
+  {
+    "id": "evt-ombak-timur",
+    "slug": "ombak-timur-festival",
+    "title": "Ombak Timur Festival",
+    "artist": "Berbagai Artis",
+    "genre": "edm",
+    "city": "Makassar",
+    "venueId": "dermaga-senja",
+    "date": "2027-03-13T11:00:00.000Z",
+    "salesOpenAt": "2026-11-01T03:00:00.000Z",
+    "description": "Festival musik tepi pantai dengan matahari terbenam sebagai pembuka. Penjualan tiket dibuka 1 November.",
+    "lineup": ["Pinisi Bass", "DJ Arunika", "Karang Laut", "Bugis Groove"],
+    "palette": ["#00C2FF", "#FF3D8B"],
+    "pattern": "waves",
+    "photo": "/photos/crowd-2.webp",
+    "popularity": 82,
+    "categories": [
+      { "id": "festival", "name": "Festival", "price": 400000, "type": "festival", "quota": 5000, "sold": 0 },
+      { "id": "vip", "name": "VIP Pantai", "price": 900000, "type": "festival", "quota": 600, "sold": 0 }
+    ]
+  },
+  {
+    "id": "evt-malam-swing",
+    "slug": "malam-swing-bandung",
+    "title": "Malam Swing Bandung",
+    "artist": "Trio Kabut",
+    "genre": "jazz",
+    "city": "Bandung",
+    "venueId": "balai-sora",
+    "date": "2026-12-19T12:30:00.000Z",
+    "salesOpenAt": "2026-09-25T03:00:00.000Z",
+    "description": "Trio jazz piano, kontrabas, dan drum memainkan komposisi orisinal dan standar jazz di udara sejuk Bandung.",
+    "lineup": ["Trio Kabut", "Nadira Sasmita"],
+    "palette": ["#C6FF3D", "#3B1E54"],
+    "pattern": "bars",
+    "photo": "/photos/stage-2.webp",
+    "popularity": 58,
+    "categories": [
+      { "id": "festival", "name": "Reguler", "price": 250000, "type": "festival", "quota": 1500, "sold": 420 }
+    ]
+  },
+  {
+    "id": "evt-karat-baja",
+    "slug": "karat-dan-baja",
+    "title": "Karat & Baja",
+    "artist": "Karat",
+    "genre": "rock",
+    "city": "Surabaya",
+    "venueId": "hall-pelabuhan",
+    "date": "2027-02-20T12:00:00.000Z",
+    "salesOpenAt": "2026-10-01T03:00:00.000Z",
+    "description": "Malam rock keras di kota pahlawan bersama Karat dan band-band cadas Jawa Timur.",
+    "lineup": ["Karat", "Besi Tua", "Gerhana"],
+    "palette": ["#FF5C5C", "#F5A524"],
+    "pattern": "grid",
+    "photo": "/photos/crowd-3.webp",
+    "popularity": 67,
+    "categories": [
+      { "id": "festival", "name": "Festival", "price": 280000, "type": "festival", "quota": 4000, "sold": 980 }
+    ]
+  },
+  {
+    "id": "evt-rinai-teater",
+    "slug": "rinai-di-teater",
+    "title": "Rinai di Teater",
+    "artist": "Rinai",
+    "genre": "pop",
+    "city": "Jakarta",
+    "venueId": "teater-nusantara",
+    "date": "2027-03-06T12:00:00.000Z",
+    "salesOpenAt": "2026-10-08T03:00:00.000Z",
+    "description": "Konser tunggal pertama Rinai, penyanyi-penulis lagu yang dikenal lewat balada piano. Dipentaskan dengan tata panggung teatrikal.",
+    "lineup": ["Rinai", "Paduan Suara Cahaya"],
+    "palette": ["#7C7CF5", "#FF3D8B"],
+    "pattern": "sun",
+    "photo": "/photos/stage-1.webp",
+    "featured": true,
+    "popularity": 85,
+    "categories": [
+      { "id": "vip", "name": "VIP", "price": 1100000, "type": "seated", "quota": 0, "sold": 0 },
+      { "id": "gold", "name": "Gold", "price": 650000, "type": "seated", "quota": 0, "sold": 0 },
+      { "id": "silver", "name": "Silver", "price": 325000, "type": "seated", "quota": 0, "sold": 0 }
+    ]
+  },
+  {
+    "id": "evt-gema-kidul",
+    "slug": "gema-kidul-folk",
+    "title": "Gema Kidul: Malam Folk",
+    "artist": "Kidung Lintang",
+    "genre": "indie",
+    "city": "Yogyakarta",
+    "venueId": "alun-alun-selatan",
+    "date": "2026-11-21T11:30:00.000Z",
+    "salesOpenAt": "2026-09-05T03:00:00.000Z",
+    "description": "Musik folk, gamelan, dan api unggun. Kidung Lintang mengajak penonton bernyanyi bersama di bawah langit Jogja.",
+    "lineup": ["Kidung Lintang", "Payung Kertas"],
+    "palette": ["#F5A524", "#0E7C86"],
+    "pattern": "rings",
+    "photo": "/photos/crowd-4.webp",
+    "popularity": 73,
+    "categories": [
+      { "id": "festival", "name": "Festival", "price": 150000, "type": "festival", "quota": 3000, "sold": 2790 }
+    ]
+  }
+]

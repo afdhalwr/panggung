@@ -1,0 +1,2578 @@
+[
+ {
+  "id": "teater-nusantara",
+  "name": "Teater Nusantara",
+  "city": "Jakarta",
+  "address": "Jl. Gatot Subroto Kav. 12, Jakarta Selatan",
+  "type": "seated",
+  "capacity": 274,
+  "width": 760,
+  "height": 612,
+  "seats": [
+   {
+    "id": "A1",
+    "section": "vip",
+    "row": "A",
+    "number": 1,
+    "categoryId": "vip",
+    "x": 155,
+    "y": 110
+   },
+   {
+    "id": "A2",
+    "section": "vip",
+    "row": "A",
+    "number": 2,
+    "categoryId": "vip",
+    "x": 185,
+    "y": 110
+   },
+   {
+    "id": "A3",
+    "section": "vip",
+    "row": "A",
+    "number": 3,
+    "categoryId": "vip",
+    "x": 215,
+    "y": 110
+   },
+   {
+    "id": "A4",
+    "section": "vip",
+    "row": "A",
+    "number": 4,
+    "categoryId": "vip",
+    "x": 245,
+    "y": 110
+   },
+   {
+    "id": "A5",
+    "section": "vip",
+    "row": "A",
+    "number": 5,
+    "categoryId": "vip",
+    "x": 275,
+    "y": 110
+   },
+   {
+    "id": "A6",
+    "section": "vip",
+    "row": "A",
+    "number": 6,
+    "categoryId": "vip",
+    "x": 305,
+    "y": 110
+   },
+   {
+    "id": "A7",
+    "section": "vip",
+    "row": "A",
+    "number": 7,
+    "categoryId": "vip",
+    "x": 335,
+    "y": 110
+   },
+   {
+    "id": "A8",
+    "section": "vip",
+    "row": "A",
+    "number": 8,
+    "categoryId": "vip",
+    "x": 365,
+    "y": 110
+   },
+   {
+    "id": "A9",
+    "section": "vip",
+    "row": "A",
+    "number": 9,
+    "categoryId": "vip",
+    "x": 395,
+    "y": 110,
+    "seedSold": true
+   },
+   {
+    "id": "A10",
+    "section": "vip",
+    "row": "A",
+    "number": 10,
+    "categoryId": "vip",
+    "x": 425,
+    "y": 110
+   },
+   {
+    "id": "A11",
+    "section": "vip",
+    "row": "A",
+    "number": 11,
+    "categoryId": "vip",
+    "x": 455,
+    "y": 110
+   },
+   {
+    "id": "A12",
+    "section": "vip",
+    "row": "A",
+    "number": 12,
+    "categoryId": "vip",
+    "x": 485,
+    "y": 110
+   },
+   {
+    "id": "A13",
+    "section": "vip",
+    "row": "A",
+    "number": 13,
+    "categoryId": "vip",
+    "x": 515,
+    "y": 110
+   },
+   {
+    "id": "A14",
+    "section": "vip",
+    "row": "A",
+    "number": 14,
+    "categoryId": "vip",
+    "x": 545,
+    "y": 110
+   },
+   {
+    "id": "A15",
+    "section": "vip",
+    "row": "A",
+    "number": 15,
+    "categoryId": "vip",
+    "x": 575,
+    "y": 110
+   },
+   {
+    "id": "A16",
+    "section": "vip",
+    "row": "A",
+    "number": 16,
+    "categoryId": "vip",
+    "x": 605,
+    "y": 110
+   },
+   {
+    "id": "B1",
+    "section": "vip",
+    "row": "B",
+    "number": 1,
+    "categoryId": "vip",
+    "x": 155,
+    "y": 140,
+    "seedSold": true
+   },
+   {
+    "id": "B2",
+    "section": "vip",
+    "row": "B",
+    "number": 2,
+    "categoryId": "vip",
+    "x": 185,
+    "y": 140
+   },
+   {
+    "id": "B3",
+    "section": "vip",
+    "row": "B",
+    "number": 3,
+    "categoryId": "vip",
+    "x": 215,
+    "y": 140
+   },
+   {
+    "id": "B4",
+    "section": "vip",
+    "row": "B",
+    "number": 4,
+    "categoryId": "vip",
+    "x": 245,
+    "y": 140
+   },
+   {
+    "id": "B5",
+    "section": "vip",
+    "row": "B",
+    "number": 5,
+    "categoryId": "vip",
+    "x": 275,
+    "y": 140
+   },
+   {
+    "id": "B6",
+    "section": "vip",
+    "row": "B",
+    "number": 6,
+    "categoryId": "vip",
+    "x": 305,
+    "y": 140
+   },
+   {
+    "id": "B7",
+    "section": "vip",
+    "row": "B",
+    "number": 7,
+    "categoryId": "vip",
+    "x": 335,
+    "y": 140
+   },
+   {
+    "id": "B8",
+    "section": "vip",
+    "row": "B",
+    "number": 8,
+    "categoryId": "vip",
+    "x": 365,
+    "y": 140,
+    "seedSold": true
+   },
+   {
+    "id": "B9",
+    "section": "vip",
+    "row": "B",
+    "number": 9,
+    "categoryId": "vip",
+    "x": 395,
+    "y": 140
+   },
+   {
+    "id": "B10",
+    "section": "vip",
+    "row": "B",
+    "number": 10,
+    "categoryId": "vip",
+    "x": 425,
+    "y": 140
+   },
+   {
+    "id": "B11",
+    "section": "vip",
+    "row": "B",
+    "number": 11,
+    "categoryId": "vip",
+    "x": 455,
+    "y": 140
+   },
+   {
+    "id": "B12",
+    "section": "vip",
+    "row": "B",
+    "number": 12,
+    "categoryId": "vip",
+    "x": 485,
+    "y": 140,
+    "seedSold": true
+   },
+   {
+    "id": "B13",
+    "section": "vip",
+    "row": "B",
+    "number": 13,
+    "categoryId": "vip",
+    "x": 515,
+    "y": 140
+   },
+   {
+    "id": "B14",
+    "section": "vip",
+    "row": "B",
+    "number": 14,
+    "categoryId": "vip",
+    "x": 545,
+    "y": 140
+   },
+   {
+    "id": "B15",
+    "section": "vip",
+    "row": "B",
+    "number": 15,
+    "categoryId": "vip",
+    "x": 575,
+    "y": 140,
+    "seedSold": true
+   },
+   {
+    "id": "B16",
+    "section": "vip",
+    "row": "B",
+    "number": 16,
+    "categoryId": "vip",
+    "x": 605,
+    "y": 140
+   },
+   {
+    "id": "C1",
+    "section": "vip",
+    "row": "C",
+    "number": 1,
+    "categoryId": "vip",
+    "x": 155,
+    "y": 170
+   },
+   {
+    "id": "C2",
+    "section": "vip",
+    "row": "C",
+    "number": 2,
+    "categoryId": "vip",
+    "x": 185,
+    "y": 170
+   },
+   {
+    "id": "C3",
+    "section": "vip",
+    "row": "C",
+    "number": 3,
+    "categoryId": "vip",
+    "x": 215,
+    "y": 170
+   },
+   {
+    "id": "C4",
+    "section": "vip",
+    "row": "C",
+    "number": 4,
+    "categoryId": "vip",
+    "x": 245,
+    "y": 170
+   },
+   {
+    "id": "C5",
+    "section": "vip",
+    "row": "C",
+    "number": 5,
+    "categoryId": "vip",
+    "x": 275,
+    "y": 170,
+    "seedSold": true
+   },
+   {
+    "id": "C6",
+    "section": "vip",
+    "row": "C",
+    "number": 6,
+    "categoryId": "vip",
+    "x": 305,
+    "y": 170
+   },
+   {
+    "id": "C7",
+    "section": "vip",
+    "row": "C",
+    "number": 7,
+    "categoryId": "vip",
+    "x": 335,
+    "y": 170
+   },
+   {
+    "id": "C8",
+    "section": "vip",
+    "row": "C",
+    "number": 8,
+    "categoryId": "vip",
+    "x": 365,
+    "y": 170
+   },
+   {
+    "id": "C9",
+    "section": "vip",
+    "row": "C",
+    "number": 9,
+    "categoryId": "vip",
+    "x": 395,
+    "y": 170
+   },
+   {
+    "id": "C10",
+    "section": "vip",
+    "row": "C",
+    "number": 10,
+    "categoryId": "vip",
+    "x": 425,
+    "y": 170
+   },
+   {
+    "id": "C11",
+    "section": "vip",
+    "row": "C",
+    "number": 11,
+    "categoryId": "vip",
+    "x": 455,
+    "y": 170
+   },
+   {
+    "id": "C12",
+    "section": "vip",
+    "row": "C",
+    "number": 12,
+    "categoryId": "vip",
+    "x": 485,
+    "y": 170
+   },
+   {
+    "id": "C13",
+    "section": "vip",
+    "row": "C",
+    "number": 13,
+    "categoryId": "vip",
+    "x": 515,
+    "y": 170
+   },
+   {
+    "id": "C14",
+    "section": "vip",
+    "row": "C",
+    "number": 14,
+    "categoryId": "vip",
+    "x": 545,
+    "y": 170
+   },
+   {
+    "id": "C15",
+    "section": "vip",
+    "row": "C",
+    "number": 15,
+    "categoryId": "vip",
+    "x": 575,
+    "y": 170
+   },
+   {
+    "id": "C16",
+    "section": "vip",
+    "row": "C",
+    "number": 16,
+    "categoryId": "vip",
+    "x": 605,
+    "y": 170,
+    "seedSold": true
+   },
+   {
+    "id": "D1",
+    "section": "vip",
+    "row": "D",
+    "number": 1,
+    "categoryId": "vip",
+    "x": 155,
+    "y": 200
+   },
+   {
+    "id": "D2",
+    "section": "vip",
+    "row": "D",
+    "number": 2,
+    "categoryId": "vip",
+    "x": 185,
+    "y": 200
+   },
+   {
+    "id": "D3",
+    "section": "vip",
+    "row": "D",
+    "number": 3,
+    "categoryId": "vip",
+    "x": 215,
+    "y": 200,
+    "seedSold": true
+   },
+   {
+    "id": "D4",
+    "section": "vip",
+    "row": "D",
+    "number": 4,
+    "categoryId": "vip",
+    "x": 245,
+    "y": 200
+   },
+   {
+    "id": "D5",
+    "section": "vip",
+    "row": "D",
+    "number": 5,
+    "categoryId": "vip",
+    "x": 275,
+    "y": 200,
+    "seedSold": true
+   },
+   {
+    "id": "D6",
+    "section": "vip",
+    "row": "D",
+    "number": 6,
+    "categoryId": "vip",
+    "x": 305,
+    "y": 200
+   },
+   {
+    "id": "D7",
+    "section": "vip",
+    "row": "D",
+    "number": 7,
+    "categoryId": "vip",
+    "x": 335,
+    "y": 200
+   },
+   {
+    "id": "D8",
+    "section": "vip",
+    "row": "D",
+    "number": 8,
+    "categoryId": "vip",
+    "x": 365,
+    "y": 200
+   },
+   {
+    "id": "D9",
+    "section": "vip",
+    "row": "D",
+    "number": 9,
+    "categoryId": "vip",
+    "x": 395,
+    "y": 200
+   },
+   {
+    "id": "D10",
+    "section": "vip",
+    "row": "D",
+    "number": 10,
+    "categoryId": "vip",
+    "x": 425,
+    "y": 200
+   },
+   {
+    "id": "D11",
+    "section": "vip",
+    "row": "D",
+    "number": 11,
+    "categoryId": "vip",
+    "x": 455,
+    "y": 200
+   },
+   {
+    "id": "D12",
+    "section": "vip",
+    "row": "D",
+    "number": 12,
+    "categoryId": "vip",
+    "x": 485,
+    "y": 200
+   },
+   {
+    "id": "D13",
+    "section": "vip",
+    "row": "D",
+    "number": 13,
+    "categoryId": "vip",
+    "x": 515,
+    "y": 200
+   },
+   {
+    "id": "D14",
+    "section": "vip",
+    "row": "D",
+    "number": 14,
+    "categoryId": "vip",
+    "x": 545,
+    "y": 200
+   },
+   {
+    "id": "D15",
+    "section": "vip",
+    "row": "D",
+    "number": 15,
+    "categoryId": "vip",
+    "x": 575,
+    "y": 200
+   },
+   {
+    "id": "D16",
+    "section": "vip",
+    "row": "D",
+    "number": 16,
+    "categoryId": "vip",
+    "x": 605,
+    "y": 200,
+    "seedSold": true
+   },
+   {
+    "id": "E1",
+    "section": "gold",
+    "row": "E",
+    "number": 1,
+    "categoryId": "gold",
+    "x": 80,
+    "y": 254
+   },
+   {
+    "id": "E2",
+    "section": "gold",
+    "row": "E",
+    "number": 2,
+    "categoryId": "gold",
+    "x": 110,
+    "y": 254,
+    "seedSold": true
+   },
+   {
+    "id": "E3",
+    "section": "gold",
+    "row": "E",
+    "number": 3,
+    "categoryId": "gold",
+    "x": 140,
+    "y": 254
+   },
+   {
+    "id": "E4",
+    "section": "gold",
+    "row": "E",
+    "number": 4,
+    "categoryId": "gold",
+    "x": 170,
+    "y": 254
+   },
+   {
+    "id": "E5",
+    "section": "gold",
+    "row": "E",
+    "number": 5,
+    "categoryId": "gold",
+    "x": 200,
+    "y": 254
+   },
+   {
+    "id": "E6",
+    "section": "gold",
+    "row": "E",
+    "number": 6,
+    "categoryId": "gold",
+    "x": 230,
+    "y": 254
+   },
+   {
+    "id": "E7",
+    "section": "gold",
+    "row": "E",
+    "number": 7,
+    "categoryId": "gold",
+    "x": 260,
+    "y": 254
+   },
+   {
+    "id": "E8",
+    "section": "gold",
+    "row": "E",
+    "number": 8,
+    "categoryId": "gold",
+    "x": 290,
+    "y": 254
+   },
+   {
+    "id": "E9",
+    "section": "gold",
+    "row": "E",
+    "number": 9,
+    "categoryId": "gold",
+    "x": 320,
+    "y": 254,
+    "seedSold": true
+   },
+   {
+    "id": "E10",
+    "section": "gold",
+    "row": "E",
+    "number": 10,
+    "categoryId": "gold",
+    "x": 350,
+    "y": 254,
+    "seedSold": true
+   },
+   {
+    "id": "E11",
+    "section": "gold",
+    "row": "E",
+    "number": 11,
+    "categoryId": "gold",
+    "x": 410,
+    "y": 254,
+    "seedSold": true
+   },
+   {
+    "id": "E12",
+    "section": "gold",
+    "row": "E",
+    "number": 12,
+    "categoryId": "gold",
+    "x": 440,
+    "y": 254
+   },
+   {
+    "id": "E13",
+    "section": "gold",
+    "row": "E",
+    "number": 13,
+    "categoryId": "gold",
+    "x": 470,
+    "y": 254
+   },
+   {
+    "id": "E14",
+    "section": "gold",
+    "row": "E",
+    "number": 14,
+    "categoryId": "gold",
+    "x": 500,
+    "y": 254
+   },
+   {
+    "id": "E15",
+    "section": "gold",
+    "row": "E",
+    "number": 15,
+    "categoryId": "gold",
+    "x": 530,
+    "y": 254
+   },
+   {
+    "id": "E16",
+    "section": "gold",
+    "row": "E",
+    "number": 16,
+    "categoryId": "gold",
+    "x": 560,
+    "y": 254
+   },
+   {
+    "id": "E17",
+    "section": "gold",
+    "row": "E",
+    "number": 17,
+    "categoryId": "gold",
+    "x": 590,
+    "y": 254
+   },
+   {
+    "id": "E18",
+    "section": "gold",
+    "row": "E",
+    "number": 18,
+    "categoryId": "gold",
+    "x": 620,
+    "y": 254
+   },
+   {
+    "id": "E19",
+    "section": "gold",
+    "row": "E",
+    "number": 19,
+    "categoryId": "gold",
+    "x": 650,
+    "y": 254
+   },
+   {
+    "id": "E20",
+    "section": "gold",
+    "row": "E",
+    "number": 20,
+    "categoryId": "gold",
+    "x": 680,
+    "y": 254,
+    "seedSold": true
+   },
+   {
+    "id": "F1",
+    "section": "gold",
+    "row": "F",
+    "number": 1,
+    "categoryId": "gold",
+    "x": 80,
+    "y": 284
+   },
+   {
+    "id": "F2",
+    "section": "gold",
+    "row": "F",
+    "number": 2,
+    "categoryId": "gold",
+    "x": 110,
+    "y": 284
+   },
+   {
+    "id": "F3",
+    "section": "gold",
+    "row": "F",
+    "number": 3,
+    "categoryId": "gold",
+    "x": 140,
+    "y": 284
+   },
+   {
+    "id": "F4",
+    "section": "gold",
+    "row": "F",
+    "number": 4,
+    "categoryId": "gold",
+    "x": 170,
+    "y": 284
+   },
+   {
+    "id": "F5",
+    "section": "gold",
+    "row": "F",
+    "number": 5,
+    "categoryId": "gold",
+    "x": 200,
+    "y": 284
+   },
+   {
+    "id": "F6",
+    "section": "gold",
+    "row": "F",
+    "number": 6,
+    "categoryId": "gold",
+    "x": 230,
+    "y": 284
+   },
+   {
+    "id": "F7",
+    "section": "gold",
+    "row": "F",
+    "number": 7,
+    "categoryId": "gold",
+    "x": 260,
+    "y": 284
+   },
+   {
+    "id": "F8",
+    "section": "gold",
+    "row": "F",
+    "number": 8,
+    "categoryId": "gold",
+    "x": 290,
+    "y": 284
+   },
+   {
+    "id": "F9",
+    "section": "gold",
+    "row": "F",
+    "number": 9,
+    "categoryId": "gold",
+    "x": 320,
+    "y": 284
+   },
+   {
+    "id": "F10",
+    "section": "gold",
+    "row": "F",
+    "number": 10,
+    "categoryId": "gold",
+    "x": 350,
+    "y": 284
+   },
+   {
+    "id": "F11",
+    "section": "gold",
+    "row": "F",
+    "number": 11,
+    "categoryId": "gold",
+    "x": 410,
+    "y": 284
+   },
+   {
+    "id": "F12",
+    "section": "gold",
+    "row": "F",
+    "number": 12,
+    "categoryId": "gold",
+    "x": 440,
+    "y": 284,
+    "seedSold": true
+   },
+   {
+    "id": "F13",
+    "section": "gold",
+    "row": "F",
+    "number": 13,
+    "categoryId": "gold",
+    "x": 470,
+    "y": 284
+   },
+   {
+    "id": "F14",
+    "section": "gold",
+    "row": "F",
+    "number": 14,
+    "categoryId": "gold",
+    "x": 500,
+    "y": 284
+   },
+   {
+    "id": "F15",
+    "section": "gold",
+    "row": "F",
+    "number": 15,
+    "categoryId": "gold",
+    "x": 530,
+    "y": 284
+   },
+   {
+    "id": "F16",
+    "section": "gold",
+    "row": "F",
+    "number": 16,
+    "categoryId": "gold",
+    "x": 560,
+    "y": 284
+   },
+   {
+    "id": "F17",
+    "section": "gold",
+    "row": "F",
+    "number": 17,
+    "categoryId": "gold",
+    "x": 590,
+    "y": 284
+   },
+   {
+    "id": "F18",
+    "section": "gold",
+    "row": "F",
+    "number": 18,
+    "categoryId": "gold",
+    "x": 620,
+    "y": 284
+   },
+   {
+    "id": "F19",
+    "section": "gold",
+    "row": "F",
+    "number": 19,
+    "categoryId": "gold",
+    "x": 650,
+    "y": 284,
+    "seedSold": true
+   },
+   {
+    "id": "F20",
+    "section": "gold",
+    "row": "F",
+    "number": 20,
+    "categoryId": "gold",
+    "x": 680,
+    "y": 284
+   },
+   {
+    "id": "G1",
+    "section": "gold",
+    "row": "G",
+    "number": 1,
+    "categoryId": "gold",
+    "x": 80,
+    "y": 314
+   },
+   {
+    "id": "G2",
+    "section": "gold",
+    "row": "G",
+    "number": 2,
+    "categoryId": "gold",
+    "x": 110,
+    "y": 314
+   },
+   {
+    "id": "G3",
+    "section": "gold",
+    "row": "G",
+    "number": 3,
+    "categoryId": "gold",
+    "x": 140,
+    "y": 314,
+    "seedSold": true
+   },
+   {
+    "id": "G4",
+    "section": "gold",
+    "row": "G",
+    "number": 4,
+    "categoryId": "gold",
+    "x": 170,
+    "y": 314,
+    "seedSold": true
+   },
+   {
+    "id": "G5",
+    "section": "gold",
+    "row": "G",
+    "number": 5,
+    "categoryId": "gold",
+    "x": 200,
+    "y": 314
+   },
+   {
+    "id": "G6",
+    "section": "gold",
+    "row": "G",
+    "number": 6,
+    "categoryId": "gold",
+    "x": 230,
+    "y": 314
+   },
+   {
+    "id": "G7",
+    "section": "gold",
+    "row": "G",
+    "number": 7,
+    "categoryId": "gold",
+    "x": 260,
+    "y": 314
+   },
+   {
+    "id": "G8",
+    "section": "gold",
+    "row": "G",
+    "number": 8,
+    "categoryId": "gold",
+    "x": 290,
+    "y": 314
+   },
+   {
+    "id": "G9",
+    "section": "gold",
+    "row": "G",
+    "number": 9,
+    "categoryId": "gold",
+    "x": 320,
+    "y": 314
+   },
+   {
+    "id": "G10",
+    "section": "gold",
+    "row": "G",
+    "number": 10,
+    "categoryId": "gold",
+    "x": 350,
+    "y": 314
+   },
+   {
+    "id": "G11",
+    "section": "gold",
+    "row": "G",
+    "number": 11,
+    "categoryId": "gold",
+    "x": 410,
+    "y": 314
+   },
+   {
+    "id": "G12",
+    "section": "gold",
+    "row": "G",
+    "number": 12,
+    "categoryId": "gold",
+    "x": 440,
+    "y": 314,
+    "seedSold": true
+   },
+   {
+    "id": "G13",
+    "section": "gold",
+    "row": "G",
+    "number": 13,
+    "categoryId": "gold",
+    "x": 470,
+    "y": 314
+   },
+   {
+    "id": "G14",
+    "section": "gold",
+    "row": "G",
+    "number": 14,
+    "categoryId": "gold",
+    "x": 500,
+    "y": 314,
+    "seedSold": true
+   },
+   {
+    "id": "G15",
+    "section": "gold",
+    "row": "G",
+    "number": 15,
+    "categoryId": "gold",
+    "x": 530,
+    "y": 314
+   },
+   {
+    "id": "G16",
+    "section": "gold",
+    "row": "G",
+    "number": 16,
+    "categoryId": "gold",
+    "x": 560,
+    "y": 314
+   },
+   {
+    "id": "G17",
+    "section": "gold",
+    "row": "G",
+    "number": 17,
+    "categoryId": "gold",
+    "x": 590,
+    "y": 314
+   },
+   {
+    "id": "G18",
+    "section": "gold",
+    "row": "G",
+    "number": 18,
+    "categoryId": "gold",
+    "x": 620,
+    "y": 314
+   },
+   {
+    "id": "G19",
+    "section": "gold",
+    "row": "G",
+    "number": 19,
+    "categoryId": "gold",
+    "x": 650,
+    "y": 314,
+    "seedSold": true
+   },
+   {
+    "id": "G20",
+    "section": "gold",
+    "row": "G",
+    "number": 20,
+    "categoryId": "gold",
+    "x": 680,
+    "y": 314,
+    "seedSold": true
+   },
+   {
+    "id": "H1",
+    "section": "gold",
+    "row": "H",
+    "number": 1,
+    "categoryId": "gold",
+    "x": 80,
+    "y": 344
+   },
+   {
+    "id": "H2",
+    "section": "gold",
+    "row": "H",
+    "number": 2,
+    "categoryId": "gold",
+    "x": 110,
+    "y": 344
+   },
+   {
+    "id": "H3",
+    "section": "gold",
+    "row": "H",
+    "number": 3,
+    "categoryId": "gold",
+    "x": 140,
+    "y": 344
+   },
+   {
+    "id": "H4",
+    "section": "gold",
+    "row": "H",
+    "number": 4,
+    "categoryId": "gold",
+    "x": 170,
+    "y": 344,
+    "seedSold": true
+   },
+   {
+    "id": "H5",
+    "section": "gold",
+    "row": "H",
+    "number": 5,
+    "categoryId": "gold",
+    "x": 200,
+    "y": 344
+   },
+   {
+    "id": "H6",
+    "section": "gold",
+    "row": "H",
+    "number": 6,
+    "categoryId": "gold",
+    "x": 230,
+    "y": 344
+   },
+   {
+    "id": "H7",
+    "section": "gold",
+    "row": "H",
+    "number": 7,
+    "categoryId": "gold",
+    "x": 260,
+    "y": 344
+   },
+   {
+    "id": "H8",
+    "section": "gold",
+    "row": "H",
+    "number": 8,
+    "categoryId": "gold",
+    "x": 290,
+    "y": 344
+   },
+   {
+    "id": "H9",
+    "section": "gold",
+    "row": "H",
+    "number": 9,
+    "categoryId": "gold",
+    "x": 320,
+    "y": 344
+   },
+   {
+    "id": "H10",
+    "section": "gold",
+    "row": "H",
+    "number": 10,
+    "categoryId": "gold",
+    "x": 350,
+    "y": 344
+   },
+   {
+    "id": "H11",
+    "section": "gold",
+    "row": "H",
+    "number": 11,
+    "categoryId": "gold",
+    "x": 410,
+    "y": 344
+   },
+   {
+    "id": "H12",
+    "section": "gold",
+    "row": "H",
+    "number": 12,
+    "categoryId": "gold",
+    "x": 440,
+    "y": 344
+   },
+   {
+    "id": "H13",
+    "section": "gold",
+    "row": "H",
+    "number": 13,
+    "categoryId": "gold",
+    "x": 470,
+    "y": 344
+   },
+   {
+    "id": "H14",
+    "section": "gold",
+    "row": "H",
+    "number": 14,
+    "categoryId": "gold",
+    "x": 500,
+    "y": 344,
+    "seedSold": true
+   },
+   {
+    "id": "H15",
+    "section": "gold",
+    "row": "H",
+    "number": 15,
+    "categoryId": "gold",
+    "x": 530,
+    "y": 344
+   },
+   {
+    "id": "H16",
+    "section": "gold",
+    "row": "H",
+    "number": 16,
+    "categoryId": "gold",
+    "x": 560,
+    "y": 344
+   },
+   {
+    "id": "H17",
+    "section": "gold",
+    "row": "H",
+    "number": 17,
+    "categoryId": "gold",
+    "x": 590,
+    "y": 344
+   },
+   {
+    "id": "H18",
+    "section": "gold",
+    "row": "H",
+    "number": 18,
+    "categoryId": "gold",
+    "x": 620,
+    "y": 344
+   },
+   {
+    "id": "H19",
+    "section": "gold",
+    "row": "H",
+    "number": 19,
+    "categoryId": "gold",
+    "x": 650,
+    "y": 344
+   },
+   {
+    "id": "H20",
+    "section": "gold",
+    "row": "H",
+    "number": 20,
+    "categoryId": "gold",
+    "x": 680,
+    "y": 344
+   },
+   {
+    "id": "J1",
+    "section": "gold",
+    "row": "J",
+    "number": 1,
+    "categoryId": "gold",
+    "x": 80,
+    "y": 374
+   },
+   {
+    "id": "J2",
+    "section": "gold",
+    "row": "J",
+    "number": 2,
+    "categoryId": "gold",
+    "x": 110,
+    "y": 374
+   },
+   {
+    "id": "J3",
+    "section": "gold",
+    "row": "J",
+    "number": 3,
+    "categoryId": "gold",
+    "x": 140,
+    "y": 374
+   },
+   {
+    "id": "J4",
+    "section": "gold",
+    "row": "J",
+    "number": 4,
+    "categoryId": "gold",
+    "x": 170,
+    "y": 374,
+    "seedSold": true
+   },
+   {
+    "id": "J5",
+    "section": "gold",
+    "row": "J",
+    "number": 5,
+    "categoryId": "gold",
+    "x": 200,
+    "y": 374
+   },
+   {
+    "id": "J6",
+    "section": "gold",
+    "row": "J",
+    "number": 6,
+    "categoryId": "gold",
+    "x": 230,
+    "y": 374
+   },
+   {
+    "id": "J7",
+    "section": "gold",
+    "row": "J",
+    "number": 7,
+    "categoryId": "gold",
+    "x": 260,
+    "y": 374
+   },
+   {
+    "id": "J8",
+    "section": "gold",
+    "row": "J",
+    "number": 8,
+    "categoryId": "gold",
+    "x": 290,
+    "y": 374
+   },
+   {
+    "id": "J9",
+    "section": "gold",
+    "row": "J",
+    "number": 9,
+    "categoryId": "gold",
+    "x": 320,
+    "y": 374
+   },
+   {
+    "id": "J10",
+    "section": "gold",
+    "row": "J",
+    "number": 10,
+    "categoryId": "gold",
+    "x": 350,
+    "y": 374
+   },
+   {
+    "id": "J11",
+    "section": "gold",
+    "row": "J",
+    "number": 11,
+    "categoryId": "gold",
+    "x": 410,
+    "y": 374
+   },
+   {
+    "id": "J12",
+    "section": "gold",
+    "row": "J",
+    "number": 12,
+    "categoryId": "gold",
+    "x": 440,
+    "y": 374,
+    "seedSold": true
+   },
+   {
+    "id": "J13",
+    "section": "gold",
+    "row": "J",
+    "number": 13,
+    "categoryId": "gold",
+    "x": 470,
+    "y": 374
+   },
+   {
+    "id": "J14",
+    "section": "gold",
+    "row": "J",
+    "number": 14,
+    "categoryId": "gold",
+    "x": 500,
+    "y": 374
+   },
+   {
+    "id": "J15",
+    "section": "gold",
+    "row": "J",
+    "number": 15,
+    "categoryId": "gold",
+    "x": 530,
+    "y": 374
+   },
+   {
+    "id": "J16",
+    "section": "gold",
+    "row": "J",
+    "number": 16,
+    "categoryId": "gold",
+    "x": 560,
+    "y": 374
+   },
+   {
+    "id": "J17",
+    "section": "gold",
+    "row": "J",
+    "number": 17,
+    "categoryId": "gold",
+    "x": 590,
+    "y": 374
+   },
+   {
+    "id": "J18",
+    "section": "gold",
+    "row": "J",
+    "number": 18,
+    "categoryId": "gold",
+    "x": 620,
+    "y": 374
+   },
+   {
+    "id": "J19",
+    "section": "gold",
+    "row": "J",
+    "number": 19,
+    "categoryId": "gold",
+    "x": 650,
+    "y": 374,
+    "seedSold": true
+   },
+   {
+    "id": "J20",
+    "section": "gold",
+    "row": "J",
+    "number": 20,
+    "categoryId": "gold",
+    "x": 680,
+    "y": 374
+   },
+   {
+    "id": "K1",
+    "section": "silver",
+    "row": "K",
+    "number": 1,
+    "categoryId": "silver",
+    "x": 50,
+    "y": 428
+   },
+   {
+    "id": "K2",
+    "section": "silver",
+    "row": "K",
+    "number": 2,
+    "categoryId": "silver",
+    "x": 80,
+    "y": 428,
+    "seedSold": true
+   },
+   {
+    "id": "K3",
+    "section": "silver",
+    "row": "K",
+    "number": 3,
+    "categoryId": "silver",
+    "x": 110,
+    "y": 428
+   },
+   {
+    "id": "K4",
+    "section": "silver",
+    "row": "K",
+    "number": 4,
+    "categoryId": "silver",
+    "x": 140,
+    "y": 428,
+    "seedSold": true
+   },
+   {
+    "id": "K5",
+    "section": "silver",
+    "row": "K",
+    "number": 5,
+    "categoryId": "silver",
+    "x": 170,
+    "y": 428
+   },
+   {
+    "id": "K6",
+    "section": "silver",
+    "row": "K",
+    "number": 6,
+    "categoryId": "silver",
+    "x": 200,
+    "y": 428,
+    "seedSold": true
+   },
+   {
+    "id": "K7",
+    "section": "silver",
+    "row": "K",
+    "number": 7,
+    "categoryId": "silver",
+    "x": 230,
+    "y": 428
+   },
+   {
+    "id": "K8",
+    "section": "silver",
+    "row": "K",
+    "number": 8,
+    "categoryId": "silver",
+    "x": 260,
+    "y": 428
+   },
+   {
+    "id": "K9",
+    "section": "silver",
+    "row": "K",
+    "number": 9,
+    "categoryId": "silver",
+    "x": 290,
+    "y": 428
+   },
+   {
+    "id": "K10",
+    "section": "silver",
+    "row": "K",
+    "number": 10,
+    "categoryId": "silver",
+    "x": 320,
+    "y": 428
+   },
+   {
+    "id": "K11",
+    "section": "silver",
+    "row": "K",
+    "number": 11,
+    "categoryId": "silver",
+    "x": 350,
+    "y": 428
+   },
+   {
+    "id": "K12",
+    "section": "silver",
+    "row": "K",
+    "number": 12,
+    "categoryId": "silver",
+    "x": 410,
+    "y": 428
+   },
+   {
+    "id": "K13",
+    "section": "silver",
+    "row": "K",
+    "number": 13,
+    "categoryId": "silver",
+    "x": 440,
+    "y": 428
+   },
+   {
+    "id": "K14",
+    "section": "silver",
+    "row": "K",
+    "number": 14,
+    "categoryId": "silver",
+    "x": 470,
+    "y": 428
+   },
+   {
+    "id": "K15",
+    "section": "silver",
+    "row": "K",
+    "number": 15,
+    "categoryId": "silver",
+    "x": 500,
+    "y": 428
+   },
+   {
+    "id": "K16",
+    "section": "silver",
+    "row": "K",
+    "number": 16,
+    "categoryId": "silver",
+    "x": 530,
+    "y": 428
+   },
+   {
+    "id": "K17",
+    "section": "silver",
+    "row": "K",
+    "number": 17,
+    "categoryId": "silver",
+    "x": 560,
+    "y": 428
+   },
+   {
+    "id": "K18",
+    "section": "silver",
+    "row": "K",
+    "number": 18,
+    "categoryId": "silver",
+    "x": 590,
+    "y": 428
+   },
+   {
+    "id": "K19",
+    "section": "silver",
+    "row": "K",
+    "number": 19,
+    "categoryId": "silver",
+    "x": 620,
+    "y": 428
+   },
+   {
+    "id": "K20",
+    "section": "silver",
+    "row": "K",
+    "number": 20,
+    "categoryId": "silver",
+    "x": 650,
+    "y": 428
+   },
+   {
+    "id": "K21",
+    "section": "silver",
+    "row": "K",
+    "number": 21,
+    "categoryId": "silver",
+    "x": 680,
+    "y": 428
+   },
+   {
+    "id": "K22",
+    "section": "silver",
+    "row": "K",
+    "number": 22,
+    "categoryId": "silver",
+    "x": 710,
+    "y": 428
+   },
+   {
+    "id": "L1",
+    "section": "silver",
+    "row": "L",
+    "number": 1,
+    "categoryId": "silver",
+    "x": 50,
+    "y": 458,
+    "seedSold": true
+   },
+   {
+    "id": "L2",
+    "section": "silver",
+    "row": "L",
+    "number": 2,
+    "categoryId": "silver",
+    "x": 80,
+    "y": 458,
+    "seedSold": true
+   },
+   {
+    "id": "L3",
+    "section": "silver",
+    "row": "L",
+    "number": 3,
+    "categoryId": "silver",
+    "x": 110,
+    "y": 458
+   },
+   {
+    "id": "L4",
+    "section": "silver",
+    "row": "L",
+    "number": 4,
+    "categoryId": "silver",
+    "x": 140,
+    "y": 458
+   },
+   {
+    "id": "L5",
+    "section": "silver",
+    "row": "L",
+    "number": 5,
+    "categoryId": "silver",
+    "x": 170,
+    "y": 458
+   },
+   {
+    "id": "L6",
+    "section": "silver",
+    "row": "L",
+    "number": 6,
+    "categoryId": "silver",
+    "x": 200,
+    "y": 458
+   },
+   {
+    "id": "L7",
+    "section": "silver",
+    "row": "L",
+    "number": 7,
+    "categoryId": "silver",
+    "x": 230,
+    "y": 458
+   },
+   {
+    "id": "L8",
+    "section": "silver",
+    "row": "L",
+    "number": 8,
+    "categoryId": "silver",
+    "x": 260,
+    "y": 458
+   },
+   {
+    "id": "L9",
+    "section": "silver",
+    "row": "L",
+    "number": 9,
+    "categoryId": "silver",
+    "x": 290,
+    "y": 458
+   },
+   {
+    "id": "L10",
+    "section": "silver",
+    "row": "L",
+    "number": 10,
+    "categoryId": "silver",
+    "x": 320,
+    "y": 458,
+    "seedSold": true
+   },
+   {
+    "id": "L11",
+    "section": "silver",
+    "row": "L",
+    "number": 11,
+    "categoryId": "silver",
+    "x": 350,
+    "y": 458
+   },
+   {
+    "id": "L12",
+    "section": "silver",
+    "row": "L",
+    "number": 12,
+    "categoryId": "silver",
+    "x": 410,
+    "y": 458
+   },
+   {
+    "id": "L13",
+    "section": "silver",
+    "row": "L",
+    "number": 13,
+    "categoryId": "silver",
+    "x": 440,
+    "y": 458,
+    "seedSold": true
+   },
+   {
+    "id": "L14",
+    "section": "silver",
+    "row": "L",
+    "number": 14,
+    "categoryId": "silver",
+    "x": 470,
+    "y": 458
+   },
+   {
+    "id": "L15",
+    "section": "silver",
+    "row": "L",
+    "number": 15,
+    "categoryId": "silver",
+    "x": 500,
+    "y": 458
+   },
+   {
+    "id": "L16",
+    "section": "silver",
+    "row": "L",
+    "number": 16,
+    "categoryId": "silver",
+    "x": 530,
+    "y": 458
+   },
+   {
+    "id": "L17",
+    "section": "silver",
+    "row": "L",
+    "number": 17,
+    "categoryId": "silver",
+    "x": 560,
+    "y": 458
+   },
+   {
+    "id": "L18",
+    "section": "silver",
+    "row": "L",
+    "number": 18,
+    "categoryId": "silver",
+    "x": 590,
+    "y": 458
+   },
+   {
+    "id": "L19",
+    "section": "silver",
+    "row": "L",
+    "number": 19,
+    "categoryId": "silver",
+    "x": 620,
+    "y": 458
+   },
+   {
+    "id": "L20",
+    "section": "silver",
+    "row": "L",
+    "number": 20,
+    "categoryId": "silver",
+    "x": 650,
+    "y": 458,
+    "seedSold": true
+   },
+   {
+    "id": "L21",
+    "section": "silver",
+    "row": "L",
+    "number": 21,
+    "categoryId": "silver",
+    "x": 680,
+    "y": 458
+   },
+   {
+    "id": "L22",
+    "section": "silver",
+    "row": "L",
+    "number": 22,
+    "categoryId": "silver",
+    "x": 710,
+    "y": 458
+   },
+   {
+    "id": "M1",
+    "section": "silver",
+    "row": "M",
+    "number": 1,
+    "categoryId": "silver",
+    "x": 50,
+    "y": 488
+   },
+   {
+    "id": "M2",
+    "section": "silver",
+    "row": "M",
+    "number": 2,
+    "categoryId": "silver",
+    "x": 80,
+    "y": 488
+   },
+   {
+    "id": "M3",
+    "section": "silver",
+    "row": "M",
+    "number": 3,
+    "categoryId": "silver",
+    "x": 110,
+    "y": 488
+   },
+   {
+    "id": "M4",
+    "section": "silver",
+    "row": "M",
+    "number": 4,
+    "categoryId": "silver",
+    "x": 140,
+    "y": 488,
+    "seedSold": true
+   },
+   {
+    "id": "M5",
+    "section": "silver",
+    "row": "M",
+    "number": 5,
+    "categoryId": "silver",
+    "x": 170,
+    "y": 488
+   },
+   {
+    "id": "M6",
+    "section": "silver",
+    "row": "M",
+    "number": 6,
+    "categoryId": "silver",
+    "x": 200,
+    "y": 488
+   },
+   {
+    "id": "M7",
+    "section": "silver",
+    "row": "M",
+    "number": 7,
+    "categoryId": "silver",
+    "x": 230,
+    "y": 488,
+    "seedSold": true
+   },
+   {
+    "id": "M8",
+    "section": "silver",
+    "row": "M",
+    "number": 8,
+    "categoryId": "silver",
+    "x": 260,
+    "y": 488
+   },
+   {
+    "id": "M9",
+    "section": "silver",
+    "row": "M",
+    "number": 9,
+    "categoryId": "silver",
+    "x": 290,
+    "y": 488
+   },
+   {
+    "id": "M10",
+    "section": "silver",
+    "row": "M",
+    "number": 10,
+    "categoryId": "silver",
+    "x": 320,
+    "y": 488,
+    "seedSold": true
+   },
+   {
+    "id": "M11",
+    "section": "silver",
+    "row": "M",
+    "number": 11,
+    "categoryId": "silver",
+    "x": 350,
+    "y": 488
+   },
+   {
+    "id": "M12",
+    "section": "silver",
+    "row": "M",
+    "number": 12,
+    "categoryId": "silver",
+    "x": 410,
+    "y": 488,
+    "seedSold": true
+   },
+   {
+    "id": "M13",
+    "section": "silver",
+    "row": "M",
+    "number": 13,
+    "categoryId": "silver",
+    "x": 440,
+    "y": 488,
+    "seedSold": true
+   },
+   {
+    "id": "M14",
+    "section": "silver",
+    "row": "M",
+    "number": 14,
+    "categoryId": "silver",
+    "x": 470,
+    "y": 488
+   },
+   {
+    "id": "M15",
+    "section": "silver",
+    "row": "M",
+    "number": 15,
+    "categoryId": "silver",
+    "x": 500,
+    "y": 488
+   },
+   {
+    "id": "M16",
+    "section": "silver",
+    "row": "M",
+    "number": 16,
+    "categoryId": "silver",
+    "x": 530,
+    "y": 488
+   },
+   {
+    "id": "M17",
+    "section": "silver",
+    "row": "M",
+    "number": 17,
+    "categoryId": "silver",
+    "x": 560,
+    "y": 488
+   },
+   {
+    "id": "M18",
+    "section": "silver",
+    "row": "M",
+    "number": 18,
+    "categoryId": "silver",
+    "x": 590,
+    "y": 488
+   },
+   {
+    "id": "M19",
+    "section": "silver",
+    "row": "M",
+    "number": 19,
+    "categoryId": "silver",
+    "x": 620,
+    "y": 488
+   },
+   {
+    "id": "M20",
+    "section": "silver",
+    "row": "M",
+    "number": 20,
+    "categoryId": "silver",
+    "x": 650,
+    "y": 488
+   },
+   {
+    "id": "M21",
+    "section": "silver",
+    "row": "M",
+    "number": 21,
+    "categoryId": "silver",
+    "x": 680,
+    "y": 488
+   },
+   {
+    "id": "M22",
+    "section": "silver",
+    "row": "M",
+    "number": 22,
+    "categoryId": "silver",
+    "x": 710,
+    "y": 488
+   },
+   {
+    "id": "N1",
+    "section": "silver",
+    "row": "N",
+    "number": 1,
+    "categoryId": "silver",
+    "x": 50,
+    "y": 518
+   },
+   {
+    "id": "N2",
+    "section": "silver",
+    "row": "N",
+    "number": 2,
+    "categoryId": "silver",
+    "x": 80,
+    "y": 518,
+    "seedSold": true
+   },
+   {
+    "id": "N3",
+    "section": "silver",
+    "row": "N",
+    "number": 3,
+    "categoryId": "silver",
+    "x": 110,
+    "y": 518,
+    "seedSold": true
+   },
+   {
+    "id": "N4",
+    "section": "silver",
+    "row": "N",
+    "number": 4,
+    "categoryId": "silver",
+    "x": 140,
+    "y": 518,
+    "seedSold": true
+   },
+   {
+    "id": "N5",
+    "section": "silver",
+    "row": "N",
+    "number": 5,
+    "categoryId": "silver",
+    "x": 170,
+    "y": 518
+   },
+   {
+    "id": "N6",
+    "section": "silver",
+    "row": "N",
+    "number": 6,
+    "categoryId": "silver",
+    "x": 200,
+    "y": 518
+   },
+   {
+    "id": "N7",
+    "section": "silver",
+    "row": "N",
+    "number": 7,
+    "categoryId": "silver",
+    "x": 230,
+    "y": 518
+   },
+   {
+    "id": "N8",
+    "section": "silver",
+    "row": "N",
+    "number": 8,
+    "categoryId": "silver",
+    "x": 260,
+    "y": 518
+   },
+   {
+    "id": "N9",
+    "section": "silver",
+    "row": "N",
+    "number": 9,
+    "categoryId": "silver",
+    "x": 290,
+    "y": 518
+   },
+   {
+    "id": "N10",
+    "section": "silver",
+    "row": "N",
+    "number": 10,
+    "categoryId": "silver",
+    "x": 320,
+    "y": 518
+   },
+   {
+    "id": "N11",
+    "section": "silver",
+    "row": "N",
+    "number": 11,
+    "categoryId": "silver",
+    "x": 350,
+    "y": 518,
+    "seedSold": true
+   },
+   {
+    "id": "N12",
+    "section": "silver",
+    "row": "N",
+    "number": 12,
+    "categoryId": "silver",
+    "x": 410,
+    "y": 518
+   },
+   {
+    "id": "N13",
+    "section": "silver",
+    "row": "N",
+    "number": 13,
+    "categoryId": "silver",
+    "x": 440,
+    "y": 518
+   },
+   {
+    "id": "N14",
+    "section": "silver",
+    "row": "N",
+    "number": 14,
+    "categoryId": "silver",
+    "x": 470,
+    "y": 518
+   },
+   {
+    "id": "N15",
+    "section": "silver",
+    "row": "N",
+    "number": 15,
+    "categoryId": "silver",
+    "x": 500,
+    "y": 518
+   },
+   {
+    "id": "N16",
+    "section": "silver",
+    "row": "N",
+    "number": 16,
+    "categoryId": "silver",
+    "x": 530,
+    "y": 518
+   },
+   {
+    "id": "N17",
+    "section": "silver",
+    "row": "N",
+    "number": 17,
+    "categoryId": "silver",
+    "x": 560,
+    "y": 518
+   },
+   {
+    "id": "N18",
+    "section": "silver",
+    "row": "N",
+    "number": 18,
+    "categoryId": "silver",
+    "x": 590,
+    "y": 518
+   },
+   {
+    "id": "N19",
+    "section": "silver",
+    "row": "N",
+    "number": 19,
+    "categoryId": "silver",
+    "x": 620,
+    "y": 518
+   },
+   {
+    "id": "N20",
+    "section": "silver",
+    "row": "N",
+    "number": 20,
+    "categoryId": "silver",
+    "x": 650,
+    "y": 518,
+    "seedSold": true
+   },
+   {
+    "id": "N21",
+    "section": "silver",
+    "row": "N",
+    "number": 21,
+    "categoryId": "silver",
+    "x": 680,
+    "y": 518
+   },
+   {
+    "id": "N22",
+    "section": "silver",
+    "row": "N",
+    "number": 22,
+    "categoryId": "silver",
+    "x": 710,
+    "y": 518,
+    "seedSold": true
+   },
+   {
+    "id": "P1",
+    "section": "silver",
+    "row": "P",
+    "number": 1,
+    "categoryId": "silver",
+    "x": 50,
+    "y": 548
+   },
+   {
+    "id": "P2",
+    "section": "silver",
+    "row": "P",
+    "number": 2,
+    "categoryId": "silver",
+    "x": 80,
+    "y": 548
+   },
+   {
+    "id": "P3",
+    "section": "silver",
+    "row": "P",
+    "number": 3,
+    "categoryId": "silver",
+    "x": 110,
+    "y": 548
+   },
+   {
+    "id": "P4",
+    "section": "silver",
+    "row": "P",
+    "number": 4,
+    "categoryId": "silver",
+    "x": 140,
+    "y": 548
+   },
+   {
+    "id": "P5",
+    "section": "silver",
+    "row": "P",
+    "number": 5,
+    "categoryId": "silver",
+    "x": 170,
+    "y": 548
+   },
+   {
+    "id": "P6",
+    "section": "silver",
+    "row": "P",
+    "number": 6,
+    "categoryId": "silver",
+    "x": 200,
+    "y": 548
+   },
+   {
+    "id": "P7",
+    "section": "silver",
+    "row": "P",
+    "number": 7,
+    "categoryId": "silver",
+    "x": 230,
+    "y": 548
+   },
+   {
+    "id": "P8",
+    "section": "silver",
+    "row": "P",
+    "number": 8,
+    "categoryId": "silver",
+    "x": 260,
+    "y": 548,
+    "seedSold": true
+   },
+   {
+    "id": "P9",
+    "section": "silver",
+    "row": "P",
+    "number": 9,
+    "categoryId": "silver",
+    "x": 290,
+    "y": 548,
+    "seedSold": true
+   },
+   {
+    "id": "P10",
+    "section": "silver",
+    "row": "P",
+    "number": 10,
+    "categoryId": "silver",
+    "x": 320,
+    "y": 548
+   },
+   {
+    "id": "P11",
+    "section": "silver",
+    "row": "P",
+    "number": 11,
+    "categoryId": "silver",
+    "x": 350,
+    "y": 548
+   },
+   {
+    "id": "P12",
+    "section": "silver",
+    "row": "P",
+    "number": 12,
+    "categoryId": "silver",
+    "x": 410,
+    "y": 548
+   },
+   {
+    "id": "P13",
+    "section": "silver",
+    "row": "P",
+    "number": 13,
+    "categoryId": "silver",
+    "x": 440,
+    "y": 548
+   },
+   {
+    "id": "P14",
+    "section": "silver",
+    "row": "P",
+    "number": 14,
+    "categoryId": "silver",
+    "x": 470,
+    "y": 548
+   },
+   {
+    "id": "P15",
+    "section": "silver",
+    "row": "P",
+    "number": 15,
+    "categoryId": "silver",
+    "x": 500,
+    "y": 548
+   },
+   {
+    "id": "P16",
+    "section": "silver",
+    "row": "P",
+    "number": 16,
+    "categoryId": "silver",
+    "x": 530,
+    "y": 548
+   },
+   {
+    "id": "P17",
+    "section": "silver",
+    "row": "P",
+    "number": 17,
+    "categoryId": "silver",
+    "x": 560,
+    "y": 548
+   },
+   {
+    "id": "P18",
+    "section": "silver",
+    "row": "P",
+    "number": 18,
+    "categoryId": "silver",
+    "x": 590,
+    "y": 548
+   },
+   {
+    "id": "P19",
+    "section": "silver",
+    "row": "P",
+    "number": 19,
+    "categoryId": "silver",
+    "x": 620,
+    "y": 548
+   },
+   {
+    "id": "P20",
+    "section": "silver",
+    "row": "P",
+    "number": 20,
+    "categoryId": "silver",
+    "x": 650,
+    "y": 548
+   },
+   {
+    "id": "P21",
+    "section": "silver",
+    "row": "P",
+    "number": 21,
+    "categoryId": "silver",
+    "x": 680,
+    "y": 548
+   },
+   {
+    "id": "P22",
+    "section": "silver",
+    "row": "P",
+    "number": 22,
+    "categoryId": "silver",
+    "x": 710,
+    "y": 548,
+    "seedSold": true
+   }
+  ]
+ },
+ {
+  "id": "taman-kota-raya",
+  "name": "Taman Kota Raya",
+  "city": "Jakarta",
+  "address": "Jl. Merdeka Timur No. 8, Jakarta Pusat",
+  "type": "festival",
+  "capacity": 8000
+ },
+ {
+  "id": "balai-sora",
+  "name": "Balai Sora",
+  "city": "Bandung",
+  "address": "Jl. Cihampelas Atas No. 21, Bandung",
+  "type": "festival",
+  "capacity": 3000
+ },
+ {
+  "id": "hall-pelabuhan",
+  "name": "Hall Pelabuhan",
+  "city": "Surabaya",
+  "address": "Jl. Perak Barat No. 5, Surabaya",
+  "type": "festival",
+  "capacity": 4500
+ },
+ {
+  "id": "alun-alun-selatan",
+  "name": "Lapangan Pendopo Kidul",
+  "city": "Yogyakarta",
+  "address": "Jl. Gamelan No. 3, Yogyakarta",
+  "type": "festival",
+  "capacity": 10000
+ },
+ {
+  "id": "gedung-deli",
+  "name": "Gedung Deli Raya",
+  "city": "Medan",
+  "address": "Jl. Kesawan No. 17, Medan",
+  "type": "festival",
+  "capacity": 3500
+ },
+ {
+  "id": "dermaga-senja",
+  "name": "Dermaga Senja",
+  "city": "Makassar",
+  "address": "Jl. Pantai Barat No. 2, Makassar",
+  "type": "festival",
+  "capacity": 6000
+ }
+]
