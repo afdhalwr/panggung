@@ -1,12 +1,13 @@
 import "server-only";
 import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore, type Firestore } from "firebase-admin/firestore";
 
 function init(): App {
   if (getApps().length) return getApps()[0]!;
 
-  const privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\n/g, "\n");
+  // Di Vercel kunci biasanya ditempel dengan "\n" literal; ubah kembali menjadi baris baru.
+  const privateKey = process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, "\n");
   if (privateKey && process.env.FIREBASE_ADMIN_CLIENT_EMAIL) {
     return initializeApp({
       credential: cert({
@@ -28,6 +29,18 @@ export function adminAuth() {
   return getAuth(init());
 }
 
-export function adminDb() {
-  return getFirestore(init());
+let db: Firestore | undefined;
+
+export function adminDb(): Firestore {
+  if (!db) {
+    db = getFirestore(init());
+    // Kolom opsional yang kosong (misalnya `perks`) cukup dilewati, bukan error.
+    // Saat hot reload modul ini dimuat ulang padahal instance sudah dipakai: settings() lalu menolak, dan itu aman.
+    try {
+      db.settings({ ignoreUndefinedProperties: true });
+    } catch {
+      // sudah diatur sebelumnya
+    }
+  }
+  return db;
 }

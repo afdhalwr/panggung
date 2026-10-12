@@ -4,10 +4,11 @@ import { ArrowRight, Search } from "lucide-react";
 import { EventCard } from "@/components/event/event-card";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
-import { CITIES, filterEvents, getEvents } from "@/lib/catalog";
+import { CITIES, filterEvents } from "@/lib/catalog";
+import { getListedEvents } from "@/server/catalog";
 
-export default function HomePage() {
-  const events = getEvents();
+export default async function HomePage() {
+  const events = await getListedEvents();
   const featured = filterEvents(events.filter((e) => e.featured), { sort: "popular" }).slice(0, 6);
   const upcoming = filterEvents(events, { sort: "date" }).slice(0, 4);
 

@@ -2,21 +2,22 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
-import { getEventBySlug, getVenue } from "@/lib/catalog";
+import { getVenue } from "@/lib/catalog";
 import { formatDate } from "@/lib/format";
+import { getEventBySlug } from "@/server/catalog";
 import { TicketSelector } from "./ticket-selector";
 
 type Params = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const event = getEventBySlug((await params).slug);
+  const event = await getEventBySlug((await params).slug);
   return event ? { title: `Pilih tiket · ${event.title}`, robots: { index: false } } : {};
 }
 
 export default async function SeatsPage({ params }: Params) {
-  const event = getEventBySlug((await params).slug);
+  const event = await getEventBySlug((await params).slug);
   if (!event) notFound();
-  if (new Date(event.salesOpenAt).getTime() > Date.now()) redirect(`/events/${event.slug}`);
+  if (event.status !== "published" || new Date(event.salesOpenAt).getTime() > Date.now()) redirect(`/events/${event.slug}`);
   const venue = getVenue(event.venueId)!;
   const seated = venue.type === "seated";
 

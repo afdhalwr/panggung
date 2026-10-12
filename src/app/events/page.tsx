@@ -3,7 +3,8 @@ import { CalendarX } from "lucide-react";
 import { EventCard } from "@/components/event/event-card";
 import { EventsBrowser } from "@/components/event/filter-bar";
 import { Reveal } from "@/components/motion/reveal";
-import { filterEvents, getEvents, parseFilter } from "@/lib/catalog";
+import { filterEvents, parseFilter } from "@/lib/catalog";
+import { getListedEvents } from "@/server/catalog";
 
 export const metadata: Metadata = {
   title: "Semua konser",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function EventsPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const filter = parseFilter(await searchParams);
-  const events = filterEvents(getEvents(), filter);
+  const events = filterEvents(await getListedEvents(), filter);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">

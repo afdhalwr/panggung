@@ -21,6 +21,7 @@ const STATUS_LABEL: Record<SeatView["status"], string> = {
   selected: "dipilih",
   held: "sedang ditahan orang lain",
   sold: "terjual",
+  blocked: "tidak dijual",
 };
 
 /**
@@ -135,7 +136,7 @@ type SeatProps = {
 
 const Seat = memo(function Seat({ seat, color, label, tabbable, focused, refCb, onKeyDown, onActivate, onFocus, onBlur }: SeatProps) {
   const h = SIZE / 2;
-  const disabled = seat.status === "sold" || seat.status === "held";
+  const disabled = seat.status === "sold" || seat.status === "held" || seat.status === "blocked";
   return (
     <g
       ref={refCb}
@@ -166,6 +167,12 @@ const Seat = memo(function Seat({ seat, color, label, tabbable, focused, refCb, 
           <rect x={-h + 1} y={-h + 1} width={SIZE - 2} height={SIZE - 2} rx={6} fill="url(#held-stripes)" stroke="var(--seat-held)" strokeWidth={2} />
           <circle r={5} fill="var(--bg-surface)" stroke="var(--seat-held)" strokeWidth={1.6} />
           <path d="M0 -2.5 V0 H2" stroke="var(--seat-held)" strokeWidth={1.4} fill="none" strokeLinecap="round" />
+        </>
+      )}
+      {seat.status === "blocked" && (
+        <>
+          <rect x={-h + 1.5} y={-h + 1.5} width={SIZE - 3} height={SIZE - 3} rx={6} fill="none" stroke="var(--text-muted)" strokeWidth={1.6} strokeDasharray="3 3" opacity={0.8} />
+          <path d="M-5 0 H5" stroke="var(--text-muted)" strokeWidth={2.2} strokeLinecap="round" opacity={0.8} />
         </>
       )}
       {seat.status === "sold" && (

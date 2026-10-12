@@ -1,11 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
   availabilityLabel,
+  canBlockSeat,
+  canRefund,
   computeTotal,
   effectiveOrderStatus,
   effectiveSeatStatus,
   festivalRemaining,
   isSeatAvailable,
+  minFestivalQuota,
   pruneExpiredHolds,
   remainingMs,
 } from "./rules";
@@ -13,7 +16,10 @@ import type { Event, InventoryDoc, SeatDoc, TicketCategory } from "./schemas";
 
 const NOW = 1_800_000_000_000;
 
-const held = (over: Partial<SeatDoc> = {}): SeatDoc => ({
+type HoldDoc = Extract<SeatDoc, { status: "held" | "sold" }>;
+const blocked: SeatDoc = { eventId: "e1", seatId: "A1", status: "blocked", blockedAt: NOW - 1000 };
+
+const held = (over: Partial<HoldDoc> = {}): HoldDoc => ({
   eventId: "e1",
   seatId: "A1",
   status: "held",
@@ -119,5 +125,44 @@ describe("availabilityLabel", () => {
     expect(availabilityLabel(cat({ quota: 100, sold: 100 }))).toBe("Habis");
     expect(availabilityLabel(cat({ quota: 100, sold: 90 }))).toBe("Hampir habis");
     expect(availabilityLabel(cat({ quota: 100, sold: 50 }))).toBe("Tersedia");
+  });
+});
+
+describe("kursi diblokir admin", () => {
+  it("tidak tersedia untuk siapa pun dan berstatus blocked", () => {
+    expect(isSeatAvailable(blocked, false, NOW)).toBe(false);
+    expect(isSeatAvailable(blocked, false, NOW, "siapa-saja")).toBe(false);
+    expect(effectiveSeatStatus(blocked, false, NOW)).toBe("blocked");
+  });
+  it("hanya kursi yang benar-benar kosong yang bisa diblokir", () => {
+    expect(canBlockSeat(undefined, false, NOW)).toBe(true);
+    expect(canBlockSeat(held({ holdExpiresAt: NOW - 1 }), false, NOW)).toBe(true);
+    expect(canBlockSeat(held(), false, NOW)).toBe(false);
+    expect(canBlockSeat(held({ status: "sold" }), false, NOW)).toBe(false);
+    expect(canBlockSeat(undefined, true, NOW)).toBe(false);
+  });
+});
+
+describe("minFestivalQuota", () => {
+  it("menjumlahkan terjual di seed, terjual di aplikasi, dan hold yang masih aktif", () => {
+    const inv: InventoryDoc = {
+      eventId: "e1",
+      categoryId: "festival",
+      sold: 7,
+      holds: { a: { qty: 2, uid: "u", expiresAt: NOW + 1 }, b: { qty: 3, uid: "u", expiresAt: NOW - 1 } },
+    };
+    expect(minFestivalQuota({ sold: 100 }, inv, NOW)).toBe(109);
+    expect(minFestivalQuota({ sold: 100 }, undefined, NOW)).toBe(100);
+  });
+});
+
+describe("canRefund", () => {
+  it("hanya order lunas yang konsernya belum lewat", () => {
+    const future = new Date(NOW + 86_400_000).toISOString();
+    const past = new Date(NOW - 86_400_000).toISOString();
+    expect(canRefund({ status: "paid" }, future, NOW)).toBe(true);
+    expect(canRefund({ status: "paid" }, past, NOW)).toBe(false);
+    expect(canRefund({ status: "refunded" }, future, NOW)).toBe(false);
+    expect(canRefund({ status: "pending" }, future, NOW)).toBe(false);
   });
 });

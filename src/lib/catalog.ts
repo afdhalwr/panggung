@@ -1,4 +1,7 @@
-import eventsJson from "@/data/seed/events.json";
+/**
+ * Fungsi murni untuk katalog. Daftar event sendiri dibaca dari Firestore di `src/server/catalog.ts`;
+ * venue dan denah kursi tetap dari data seed karena tidak diubah admin.
+ */
 import venuesJson from "@/data/seed/venues.json";
 import type { Event, Venue } from "./schemas";
 import type { EventFilter, Sort } from "./filters";
@@ -6,6 +9,10 @@ import type { EventFilter, Sort } from "./filters";
 export { CITIES, SORTS, filterToQuery, parseFilter, type EventFilter, type Sort } from "./filters";
 
 const venues = venuesJson as Venue[];
+
+export function getVenues(): Venue[] {
+  return venues;
+}
 
 export function getVenue(id: string): Venue | undefined {
   return venues.find((v) => v.id === id);
@@ -21,8 +28,8 @@ export function seatCategoryCounts(venue: Venue): Record<string, { total: number
   return counts;
 }
 
-// Kuota kategori berkursi selalu diturunkan dari denah, supaya tidak ada dua sumber kebenaran.
-const events: Event[] = (eventsJson as Event[]).map((e) => {
+/** Kuota kategori berkursi selalu diturunkan dari denah, supaya tidak ada dua sumber kebenaran. */
+export function withVenueQuota(e: Event): Event {
   const venue = getVenue(e.venueId);
   if (venue?.type !== "seated") return e;
   const counts = seatCategoryCounts(venue);
@@ -32,18 +39,16 @@ const events: Event[] = (eventsJson as Event[]).map((e) => {
       c.type === "seated" ? { ...c, quota: counts[c.id]?.total ?? 0, sold: counts[c.id]?.sold ?? 0 } : c,
     ),
   };
-});
-
-export function getEvents(): Event[] {
-  return events;
 }
 
-export function getEventBySlug(slug: string): Event | undefined {
-  return events.find((e) => e.slug === slug);
+/** Event yang tampil di beranda, daftar, dan sitemap. */
+export function isListed(e: Pick<Event, "status">): boolean {
+  return e.status === "published";
 }
 
-export function getEventById(id: string): Event | undefined {
-  return events.find((e) => e.id === id);
+/** Event yang halaman detailnya bisa dibuka pengguna (yang selesai tetap bisa, misalnya dari tiket). */
+export function isVisible(e: Pick<Event, "status">): boolean {
+  return e.status !== "draft";
 }
 
 export function minPrice(e: Event): number {

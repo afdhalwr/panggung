@@ -5,23 +5,17 @@ import { notFound } from "next/navigation";
 import { CalendarDays, Clock, MapPin, Music2 } from "lucide-react";
 import { Poster } from "@/components/event/poster";
 import { Button } from "@/components/ui/button";
-import { getEventBySlug, getEvents, getVenue, minPrice } from "@/lib/catalog";
+import { getVenue, minPrice } from "@/lib/catalog";
 import { formatDate, formatDateLong, formatTime, rupiah } from "@/lib/format";
 import { availabilityLabel } from "@/lib/rules";
 import { GENRE_LABEL } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
-
-// Status "penjualan dibuka" dihitung ulang tiap jam.
-export const revalidate = 3600;
+import { getEventBySlug } from "@/server/catalog";
 
 type Params = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getEvents().map((e) => ({ slug: e.slug }));
-}
-
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const event = getEventBySlug((await params).slug);
+  const event = await getEventBySlug((await params).slug);
   if (!event) return {};
   const venue = getVenue(event.venueId);
   const description = `${formatDateLong(event.date)} di ${venue?.name}, ${event.city}. Tiket mulai ${rupiah(minPrice(event))}.`;
@@ -40,13 +34,22 @@ const badgeStyle = {
 } as const;
 
 export default async function EventPage({ params }: Params) {
-  const event = getEventBySlug((await params).slug);
+  const event = await getEventBySlug((await params).slug);
   if (!event) notFound();
   const venue = getVenue(event.venueId);
+  const finished = event.status === "finished";
   const salesOpen = new Date(event.salesOpenAt).getTime() <= Date.now();
   const allSoldOut = event.categories.every((c) => availabilityLabel(c) === "Habis");
-  const canBuy = salesOpen && !allSoldOut;
-  const ctaLabel = !salesOpen ? `Dibuka ${formatDate(event.salesOpenAt)}` : allSoldOut ? "Tiket habis" : venue?.type === "seated" ? "Pilih kursi" : "Beli tiket";
+  const canBuy = !finished && salesOpen && !allSoldOut;
+  const ctaLabel = finished
+    ? "Konser sudah selesai"
+    : !salesOpen
+      ? `Dibuka ${formatDate(event.salesOpenAt)}`
+      : allSoldOut
+        ? "Tiket habis"
+        : venue?.type === "seated"
+          ? "Pilih kursi"
+          : "Beli tiket";
 
   return (
     <article className="pb-28 lg:pb-0">
@@ -95,7 +98,8 @@ export default async function EventPage({ params }: Params) {
             <h2 id="kategori" className="font-display text-2xl font-bold">
               Kategori tiket
             </h2>
-            {!salesOpen && (
+            {finished && <p className="rounded-xl bg-elevated px-3 py-2 text-sm text-muted">Konser ini sudah selesai. Terima kasih sudah datang!</p>}
+            {!finished && !salesOpen && (
               <p className="rounded-xl bg-elevated px-3 py-2 text-sm text-muted">
                 Penjualan dibuka {formatDateLong(event.salesOpenAt)}, {formatTime(event.salesOpenAt)}.
               </p>

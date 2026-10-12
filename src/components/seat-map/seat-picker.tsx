@@ -90,7 +90,7 @@ export function SeatPicker({ event, venue }: { event: Event; venue: Venue }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
       <div className="flex min-w-0 flex-col gap-4">
-        <SeatLegend categories={categories} remaining={remaining} />
+        <SeatLegend categories={categories} remaining={remaining} showBlocked={views.some((v) => v.status === "blocked")} />
         {error && (
           <p role="alert" className="rounded-xl bg-danger/10 px-4 py-3 text-sm text-danger">
             Status kursi gagal dimuat. Periksa koneksi lalu muat ulang halaman.

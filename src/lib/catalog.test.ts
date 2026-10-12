@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { filterEvents, getEventBySlug, getEvents, getVenue, minPrice, parseFilter, seatCategoryCounts } from "./catalog";
+import { filterEvents, getVenue, isListed, isVisible, minPrice, parseFilter, seatCategoryCounts, withVenueQuota } from "./catalog";
+import { seedEvents } from "./seed-events";
 
-const all = getEvents();
+const all = seedEvents().map(withVenueQuota);
+const getEventBySlug = (slug: string) => all.find((e) => e.slug === slug);
 
 describe("data seed", () => {
   it("berisi 12 event dengan slug unik", () => {
@@ -16,6 +18,18 @@ describe("data seed", () => {
     expect(vip.quota).toBe(counts.vip.total);
     expect(vip.sold).toBe(counts.vip.sold);
     expect(vip.quota).toBeGreaterThan(0);
+  });
+});
+
+describe("status event", () => {
+  it("event seed terbit dan tampil di daftar", () => {
+    expect(all.every((e) => e.status === "published" && isListed(e))).toBe(true);
+  });
+  it("draft disembunyikan; selesai tidak didaftar tapi detailnya tetap bisa dibuka", () => {
+    expect(isListed({ status: "draft" })).toBe(false);
+    expect(isVisible({ status: "draft" })).toBe(false);
+    expect(isListed({ status: "finished" })).toBe(false);
+    expect(isVisible({ status: "finished" })).toBe(true);
   });
 });
 

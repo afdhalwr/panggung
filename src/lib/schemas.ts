@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-/* ---------- Katalog (data seed, tidak berubah saat runtime) ---------- */
+/* ---------- Katalog (event di Firestore, venue dan denah dari data seed) ---------- */
 
 export const genreSchema = z.enum(["pop", "rock", "jazz", "edm", "indie"]);
 export type Genre = z.infer<typeof genreSchema>;
@@ -23,7 +23,17 @@ export type TicketCategory = {
   perks?: string;
 };
 
-export type PosterPattern = "rings" | "grid" | "waves" | "bars" | "sun";
+export const POSTER_PATTERNS = ["rings", "grid", "waves", "bars", "sun"] as const;
+export type PosterPattern = (typeof POSTER_PATTERNS)[number];
+
+export const EVENT_STATUSES = ["draft", "published", "finished"] as const;
+export type EventStatus = (typeof EVENT_STATUSES)[number];
+
+export const EVENT_STATUS_LABEL: Record<EventStatus, string> = {
+  draft: "Draft",
+  published: "Terbit",
+  finished: "Selesai",
+};
 
 export type Event = {
   id: string;
@@ -45,6 +55,9 @@ export type Event = {
   highDemand?: boolean;
   popularity: number;
   categories: TicketCategory[];
+  /** Diatur admin. Event draft tidak tampil di sisi pengguna. */
+  status: EventStatus;
+  updatedAt?: number;
 };
 
 export type SeatDef = {
@@ -72,16 +85,24 @@ export type Venue = {
 
 /* ---------- Dokumen Firestore (waktu disimpan dalam epoch ms) ---------- */
 
-export type SeatStatus = "available" | "held" | "sold";
+export type SeatStatus = "available" | "held" | "sold" | "blocked";
 
-export type SeatDoc = {
-  eventId: string;
-  seatId: string;
-  status: "held" | "sold";
-  uid: string;
-  orderId: string;
-  holdExpiresAt: number;
-};
+export type SeatDoc =
+  | {
+      eventId: string;
+      seatId: string;
+      status: "held" | "sold";
+      uid: string;
+      orderId: string;
+      holdExpiresAt: number;
+    }
+  | {
+      eventId: string;
+      seatId: string;
+      /** Diblokir admin: tidak dijual. */
+      status: "blocked";
+      blockedAt: number;
+    };
 
 export type InventoryDoc = {
   eventId: string;
@@ -90,7 +111,7 @@ export type InventoryDoc = {
   holds: Record<string, { qty: number; uid: string; expiresAt: number }>;
 };
 
-export const ORDER_STATUSES = ["pending", "paid", "failed", "expired", "cancelled"] as const;
+export const ORDER_STATUSES = ["pending", "paid", "failed", "expired", "cancelled", "refunded"] as const;
 export type OrderStatus = (typeof ORDER_STATUSES)[number];
 
 export type OrderItem = { categoryId: string; seatId?: string; qty: number };
@@ -107,6 +128,7 @@ export type OrderDoc = {
   holdExpiresAt: number;
   createdAt: number;
   paidAt?: number;
+  refundedAt?: number;
 };
 
 export type TicketDoc = {
@@ -118,6 +140,9 @@ export type TicketDoc = {
   seatLabel?: string;
   qrPayload: string;
   createdAt: number;
+  /** Diisi saat divalidasi admin di pintu masuk. */
+  usedAt?: number;
+  refundedAt?: number;
 };
 
 /* ---------- Input (dipakai form di klien dan Route Handler di server) ---------- */

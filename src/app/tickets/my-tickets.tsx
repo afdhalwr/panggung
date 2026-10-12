@@ -20,6 +20,7 @@ const STATUS: Record<OrderStatus, { label: string; cls: string }> = {
   expired: { label: "Kedaluwarsa", cls: "text-muted" },
   cancelled: { label: "Dibatalkan", cls: "text-muted" },
   failed: { label: "Gagal", cls: "text-danger" },
+  refunded: { label: "Direfund", cls: "text-muted" },
 };
 
 export function MyTickets() {

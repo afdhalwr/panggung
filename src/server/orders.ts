@@ -1,10 +1,11 @@
 import "server-only";
 import type { DocumentSnapshot } from "firebase-admin/firestore";
-import { getEventById, getVenue } from "@/lib/catalog";
+import { getVenue } from "@/lib/catalog";
 import { adminDb } from "@/lib/firebase/admin";
 import { HOLD_MS, computeTotal, festivalRemaining, isSeatAvailable, pruneExpiredHolds } from "@/lib/rules";
 import type {
   CreateOrderInput,
+  Event,
   CreateOrderResult,
   InventoryDoc,
   OrderDoc,
@@ -17,20 +18,22 @@ import type {
   TicketsResponse,
   TicketView,
 } from "@/lib/schemas";
+import { getAllEvents } from "./catalog";
+import { readEventTx } from "./events-store";
 import { HttpError } from "./http";
 import { signTicket } from "./qr";
 
-const seatDocId = (eventId: string, seatId: string) => `${eventId}_${seatId}`;
-const invDocId = (eventId: string, categoryId: string) => `${eventId}_${categoryId}`;
+export const seatDocId = (eventId: string, seatId: string) => `${eventId}_${seatId}`;
+export const invDocId = (eventId: string, categoryId: string) => `${eventId}_${categoryId}`;
 
-function data<T>(snap: DocumentSnapshot): T | undefined {
+export function data<T>(snap: DocumentSnapshot): T | undefined {
   return snap.exists ? (snap.data() as T) : undefined;
 }
 
-/** Validasi pesanan terhadap data seed (kategori, kursi, penjualan dibuka). Tidak menyentuh Firestore. */
-function resolveOrder(input: CreateOrderInput, now: number) {
-  const event = getEventById(input.eventId);
-  if (!event) throw new HttpError(404, "Konser tidak ditemukan.");
+/** Validasi pesanan terhadap event (status, kategori, kursi, penjualan dibuka). Fungsi murni. */
+function resolveOrder(event: Event | undefined, input: CreateOrderInput, now: number) {
+  if (!event || event.status === "draft") throw new HttpError(404, "Konser tidak ditemukan.");
+  if (event.status === "finished") throw new HttpError(410, "Konser ini sudah selesai.");
   if (new Date(event.salesOpenAt).getTime() > now) throw new HttpError(403, "Penjualan tiket belum dibuka.");
   const venue = getVenue(event.venueId);
   const seatsById = new Map<string, SeatDef>((venue?.seats ?? []).map((s) => [s.id, s]));
@@ -58,14 +61,15 @@ function resolveOrder(input: CreateOrderInput, now: number) {
  */
 export async function createOrder(uid: string, input: CreateOrderInput): Promise<CreateOrderResult> {
   const db = adminDb();
-  const { event, seatsById, total } = resolveOrder(input, Date.now());
   const orderRef = db.collection("orders").doc();
 
-  const holdExpiresAt = await db.runTransaction(async (tx) => {
+  const { holdExpiresAt, total } = await db.runTransaction(async (tx) => {
     const now = Date.now();
     const expiresAt = now + HOLD_MS;
 
     // --- Baca semua dokumen dulu (aturan transaction Firestore) ---
+    // Event dibaca di dalam transaction: harga dan kuota yang baru diubah admin langsung berlaku.
+    const { event, seatsById, total } = resolveOrder(await readEventTx(tx, input.eventId), input, now);
     const oldSnap = await tx.get(
       db.collection("orders").where("uid", "==", uid).where("eventId", "==", event.id).where("status", "==", "pending"),
     );
@@ -142,7 +146,7 @@ export async function createOrder(uid: string, input: CreateOrderInput): Promise
       createdAt: now,
     };
     tx.set(orderRef, order);
-    return expiresAt;
+    return { holdExpiresAt: expiresAt, total };
   });
 
   return { orderId: orderRef.id, holdExpiresAt, serverNow: Date.now(), total };
@@ -182,7 +186,7 @@ export async function payOrder(uid: string, orderId: string, body: PayOrderInput
     const snaps = seatRefs.length + invRefs.length ? await tx.getAll(...seatRefs, ...invRefs) : [];
     seatRefs.forEach((_ref, i) => {
       const doc = data<SeatDoc>(snaps[i]!);
-      if (doc?.orderId !== o.id || doc.status !== "held") throw new HttpError(409, "Kursi pada pesanan ini sudah tidak ditahan.");
+      if (doc?.status !== "held" || doc.orderId !== o.id) throw new HttpError(409, "Kursi pada pesanan ini sudah tidak ditahan.");
     });
 
     seatRefs.forEach((ref) => tx.update(ref, { status: "sold" }));
@@ -226,31 +230,40 @@ function assertPayable(order: OrderDoc | undefined, uid: string) {
   if (order.status !== "pending") throw new HttpError(410, "Pesanan ini sudah tidak berlaku. Silakan pilih kursi lagi.");
 }
 
-function summarize(eventId: string): EventSummary {
-  const e = getEventById(eventId);
-  if (!e) throw new Error(`Event tidak dikenal: ${eventId}`);
+export function summarize(e: Event): EventSummary {
   const { id, slug, title, artist, date, city, palette, pattern, genre } = e;
   return { id, slug, title, artist, date, city, palette, pattern, genre, venue: getVenue(e.venueId)?.name ?? "" };
+}
+
+/** Pengganti bila event sudah dihapus admin, supaya riwayat tiket tetap bisa ditampilkan. */
+function missingEvent(id: string): EventSummary {
+  return { id, slug: "", title: "Konser tidak tersedia", artist: "", date: new Date(0).toISOString(), city: "", palette: ["#3a3a48", "#20202c"], pattern: "grid", genre: "pop", venue: "" };
 }
 
 /** Tiket dan order milik pengguna, diperkaya info event (diurutkan di memori agar tidak perlu composite index). */
 export async function listTickets(uid: string): Promise<TicketsResponse> {
   const db = adminDb();
-  const [ticketSnap, orderSnap] = await Promise.all([
+  const [ticketSnap, orderSnap, events] = await Promise.all([
     db.collection("tickets").where("uid", "==", uid).get(),
     db.collection("orders").where("uid", "==", uid).get(),
+    getAllEvents(),
   ]);
+  const eventsById = new Map(events.map((e) => [e.id, e]));
+  const summarizeId = (id: string) => {
+    const e = eventsById.get(id);
+    return e ? summarize(e) : missingEvent(id);
+  };
   const orders = orderSnap.docs
     .map((d) => d.data() as OrderDoc)
     .sort((a, b) => b.createdAt - a.createdAt)
-    .map((o) => ({ ...o, event: summarize(o.eventId) }));
+    .map((o) => ({ ...o, event: summarizeId(o.eventId) }));
   const byId = new Map(orders.map((o) => [o.id, o]));
   const tickets: TicketView[] = ticketSnap.docs
     .map((d) => d.data() as TicketDoc)
     .map((t) => {
       const o = byId.get(t.orderId);
-      const event = o?.event ?? summarize(t.eventId);
-      const categoryName = getEventById(t.eventId)?.categories.find((c) => c.id === t.categoryId)?.name ?? t.categoryId;
+      const event = o?.event ?? summarizeId(t.eventId);
+      const categoryName = eventsById.get(t.eventId)?.categories.find((c) => c.id === t.categoryId)?.name ?? t.categoryId;
       return { ...t, event, categoryName, order: { buyer: o?.buyer, paidAt: o?.paidAt, total: o?.total ?? 0, method: o?.method } };
     })
     // Konser terdekat dulu, lalu urutan kursi.

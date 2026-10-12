@@ -3,8 +3,9 @@
  *   Lokal (emulator):  npm run emulators   lalu   npm run seed:demo
  *   Produksi:          isi FIREBASE_ADMIN_* di .env.local lalu npm run seed:demo
  */
-import { getEventById, getVenue } from "@/lib/catalog";
+import { getVenue } from "@/lib/catalog";
 import { adminAuth, adminDb } from "@/lib/firebase/admin";
+import { readAllEvents } from "@/server/events-store";
 import { createOrder, payOrder } from "@/server/orders";
 
 try {
@@ -29,7 +30,7 @@ async function main() {
   }
 
   // 1) Dua kursi VIP berdampingan di Senja Ruah.
-  const senja = getEventById("evt-senja-ruah")!;
+  const senja = (await readAllEvents()).find((e) => e.id === "evt-senja-ruah")!;
   const free = getVenue(senja.venueId)!.seats!.filter((s) => s.categoryId === "vip" && !s.seedSold);
   const pair = free.find((s, i) => free[i + 1]?.row === s.row && free[i + 1]?.number === s.number + 1)!;
   const seats = [pair, free[free.indexOf(pair) + 1]!];
