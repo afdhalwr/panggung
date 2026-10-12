@@ -189,3 +189,16 @@ export type CreateOrderResult = {
 export type PayOrderResult = { ticketIds: string[] };
 
 export type ApiError = { error: string; takenSeatIds?: string[] };
+
+/** Ringkasan event yang dikirim bersama tiket/order, supaya klien tidak perlu memuat data seed. */
+export type EventSummary = Pick<Event, "id" | "slug" | "title" | "artist" | "date" | "city" | "palette" | "pattern" | "genre"> & { venue: string };
+
+export type TicketView = TicketDoc & {
+  event: EventSummary;
+  categoryName: string;
+  order: Pick<OrderDoc, "buyer" | "paidAt" | "total" | "method">;
+};
+
+export type OrderView = OrderDoc & { event: EventSummary };
+
+export type TicketsResponse = { tickets: TicketView[]; orders: OrderView[] };

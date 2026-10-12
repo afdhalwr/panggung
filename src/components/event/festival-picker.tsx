@@ -7,17 +7,18 @@ import { useStartHold } from "@/components/checkout/use-start-hold";
 import { useCart } from "@/features/cart/store";
 import { useSeatStatus } from "@/features/seats/use-seat-status";
 import { rupiah } from "@/lib/format";
+import { describeOrder } from "@/lib/order-info";
 import { festivalRemaining, MAX_PER_ORDER } from "@/lib/rules";
 import type { Event } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
 
 /** Pemilih jumlah tiket untuk kategori festival (tanpa nomor kursi). Sisa kuota real-time dari Firestore. */
-export function FestivalPicker({ event }: { event: Event }) {
+export function FestivalPicker({ event, venueName }: { event: Event; venueName: string }) {
   const { inventory, now } = useSeatStatus(event.id);
   const cartEvent = useCart((s) => s.eventId);
   const selection = useCart((s) => s.selection);
   const setQty = useCart((s) => s.setQty);
-  const { start, busy } = useStartHold(event.id, `/events/${event.slug}/seats`);
+  const { start, busy } = useStartHold(event.id, `/events/${event.slug}/seats`, () => describeOrder(event, venueName, useCart.getState().selection));
   const mine = cartEvent === event.id ? selection : [];
   const qtyOf = (id: string) => mine.find((i) => i.categoryId === id)?.qty ?? 0;
 

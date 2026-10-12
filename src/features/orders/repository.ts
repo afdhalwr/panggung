@@ -1,7 +1,7 @@
 "use client";
 
 import { firebase } from "@/lib/firebase/client";
-import type { ApiError, CreateOrderInput, CreateOrderResult, OrderDoc, PayOrderInput, PayOrderResult, TicketDoc } from "@/lib/schemas";
+import type { ApiError, CreateOrderInput, CreateOrderResult, PayOrderInput, PayOrderResult, TicketsResponse } from "@/lib/schemas";
 
 /** Error dari API dengan status HTTP, supaya UI bisa membedakan 409/410/402. */
 export class ApiRequestError extends Error {
@@ -13,8 +13,6 @@ export class ApiRequestError extends Error {
     super(message);
   }
 }
-
-export type TicketView = TicketDoc & { order: Pick<OrderDoc, "buyer" | "paidAt" | "total"> };
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const user = firebase().auth.currentUser;
@@ -44,5 +42,5 @@ export const ordersRepository = {
       method: "POST",
       body: JSON.stringify(input),
     }),
-  listTickets: () => request<{ tickets: TicketView[]; orders: OrderDoc[] }>("/api/tickets"),
+  listTickets: () => request<TicketsResponse>("/api/tickets"),
 };

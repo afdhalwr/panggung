@@ -51,9 +51,10 @@ describe("cart store", () => {
   it("menyimpan hold dan selisih jam server", () => {
     const { toggleSeat, startHold } = useCart.getState();
     toggleSeat("e1", seat("A1"));
-    startHold({ orderId: "o1", holdExpiresAt: 10_600_000, serverNow: 10_000_000, total: 1_500_000 }, 9_990_000);
+    const info = { title: "Konser", slug: "konser", date: "2026-11-14T12:00:00.000Z", venue: "Teater", lines: [{ label: "VIP · Kursi A1", price: 1_500_000 }] };
+    startHold({ orderId: "o1", holdExpiresAt: 10_600_000, serverNow: 10_000_000, total: 1_500_000 }, info, 9_990_000);
     const s = useCart.getState();
-    expect(s.order).toMatchObject({ id: "o1", eventId: "e1", holdExpiresAt: 10_600_000, total: 1_500_000 });
+    expect(s.order).toMatchObject({ id: "o1", eventId: "e1", holdExpiresAt: 10_600_000, total: 1_500_000, info });
     expect(s.order?.items).toEqual([{ categoryId: "vip", seatId: "A1", qty: 1 }]);
     expect(s.clockOffset).toBe(10_000);
   });

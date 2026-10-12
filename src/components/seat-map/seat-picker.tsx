@@ -10,6 +10,7 @@ import { useAuth } from "@/features/auth/auth-provider";
 import { useCart } from "@/features/cart/store";
 import { useSeatStatus } from "@/features/seats/use-seat-status";
 import { rupiah } from "@/lib/format";
+import { describeOrder } from "@/lib/order-info";
 import { effectiveSeatStatus, isSeatAvailable, MAX_PER_ORDER } from "@/lib/rules";
 import type { Event, Venue } from "@/lib/schemas";
 import { categoryColor } from "@/lib/seat-colors";
@@ -23,7 +24,7 @@ export function SeatPicker({ event, venue }: { event: Event; venue: Venue }) {
   const selection = useCart((s) => s.selection);
   const toggleSeat = useCart((s) => s.toggleSeat);
   const removeSeats = useCart((s) => s.removeSeats);
-  const { start, busy } = useStartHold(event.id, `/events/${event.slug}/seats`);
+  const { start, busy } = useStartHold(event.id, `/events/${event.slug}/seats`, () => describeOrder(event, venue.name, useCart.getState().selection));
 
   const mine = useMemo(() => (cartEvent === event.id ? selection : []), [cartEvent, event.id, selection]);
   const selectedIds = useMemo(() => new Set(mine.map((i) => i.seatId)), [mine]);
@@ -88,7 +89,7 @@ export function SeatPicker({ event, venue }: { event: Event; venue: Venue }) {
             Status kursi gagal dimuat. Periksa koneksi lalu muat ulang halaman.
           </p>
         )}
-        <div className="relative overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
+        <div data-seat-map aria-busy={!ready} className="relative overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface">
           {!ready && <div className="absolute inset-0 z-10 animate-pulse bg-surface/60" aria-hidden />}
           <TransformWrapper minScale={1} maxScale={4} initialScale={1} centerOnInit doubleClick={{ mode: "zoomIn" }} wheel={{ activationKeys: ["Control", "Meta"] }}>
             {({ zoomIn, zoomOut, resetTransform }) => (

@@ -13,6 +13,9 @@ import type {
   SeatDef,
   SeatDoc,
   TicketDoc,
+  EventSummary,
+  TicketsResponse,
+  TicketView,
 } from "@/lib/schemas";
 import { HttpError } from "./http";
 import { signTicket } from "./qr";
@@ -223,24 +226,34 @@ function assertPayable(order: OrderDoc | undefined, uid: string) {
   if (order.status !== "pending") throw new HttpError(410, "Pesanan ini sudah tidak berlaku. Silakan pilih kursi lagi.");
 }
 
-export type TicketView = TicketDoc & { order: Pick<OrderDoc, "buyer" | "paidAt" | "total"> };
+function summarize(eventId: string): EventSummary {
+  const e = getEventById(eventId);
+  if (!e) throw new Error(`Event tidak dikenal: ${eventId}`);
+  const { id, slug, title, artist, date, city, palette, pattern, genre } = e;
+  return { id, slug, title, artist, date, city, palette, pattern, genre, venue: getVenue(e.venueId)?.name ?? "" };
+}
 
-/** Tiket dan order milik pengguna (diurutkan di memori agar tidak perlu composite index). */
-export async function listTickets(uid: string): Promise<{ tickets: TicketView[]; orders: OrderDoc[] }> {
+/** Tiket dan order milik pengguna, diperkaya info event (diurutkan di memori agar tidak perlu composite index). */
+export async function listTickets(uid: string): Promise<TicketsResponse> {
   const db = adminDb();
   const [ticketSnap, orderSnap] = await Promise.all([
     db.collection("tickets").where("uid", "==", uid).get(),
     db.collection("orders").where("uid", "==", uid).get(),
   ]);
-  const orders = orderSnap.docs.map((d) => d.data() as OrderDoc).sort((a, b) => b.createdAt - a.createdAt);
-  const byId = new Map(orders.map((o) => [o.id, o]));
-  const tickets = ticketSnap.docs
-    .map((d) => d.data() as TicketDoc)
+  const orders = orderSnap.docs
+    .map((d) => d.data() as OrderDoc)
     .sort((a, b) => b.createdAt - a.createdAt)
+    .map((o) => ({ ...o, event: summarize(o.eventId) }));
+  const byId = new Map(orders.map((o) => [o.id, o]));
+  const tickets: TicketView[] = ticketSnap.docs
+    .map((d) => d.data() as TicketDoc)
     .map((t) => {
       const o = byId.get(t.orderId);
-      return { ...t, order: { buyer: o?.buyer, paidAt: o?.paidAt, total: o?.total ?? 0 } };
-    });
+      const event = o?.event ?? summarize(t.eventId);
+      const categoryName = getEventById(t.eventId)?.categories.find((c) => c.id === t.categoryId)?.name ?? t.categoryId;
+      return { ...t, event, categoryName, order: { buyer: o?.buyer, paidAt: o?.paidAt, total: o?.total ?? 0, method: o?.method } };
+    })
+    // Konser terdekat dulu, lalu urutan kursi.
+    .sort((a, b) => a.event.date.localeCompare(b.event.date) || (a.seatLabel ?? a.id).localeCompare(b.seatLabel ?? b.id, "id", { numeric: true }));
   return { tickets, orders };
 }
-

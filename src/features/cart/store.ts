@@ -4,12 +4,22 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { MAX_PER_ORDER, type BuyerInput, type CreateOrderResult, type OrderItem, type PaymentMethod } from "@/lib/schemas";
 
+/** Info tampilan yang ikut disimpan, supaya halaman checkout tidak perlu memuat seluruh data seed. */
+export type OrderInfo = {
+  title: string;
+  slug: string;
+  date: string;
+  venue: string;
+  lines: { label: string; price: number }[];
+};
+
 export type HeldOrder = {
   id: string;
   eventId: string;
   holdExpiresAt: number;
   total: number;
   items: OrderItem[];
+  info: OrderInfo;
 };
 
 type CartState = {
@@ -24,7 +34,7 @@ type CartState = {
   toggleSeat: (eventId: string, seat: { id: string; categoryId: string }) => "added" | "removed" | "limit";
   setQty: (eventId: string, categoryId: string, qty: number) => "ok" | "limit";
   removeSeats: (seatIds: string[]) => void;
-  startHold: (result: CreateOrderResult, clientNow?: number) => void;
+  startHold: (result: CreateOrderResult, info: OrderInfo, clientNow?: number) => void;
   saveBuyer: (buyer: BuyerInput) => void;
   saveMethod: (method: PaymentMethod) => void;
   reset: () => void;
@@ -61,11 +71,11 @@ export const useCart = create<CartState>()(
         set({ selection: get().selection.filter((i) => !i.seatId || !seatIds.includes(i.seatId)) });
       },
 
-      startHold(result, clientNow = Date.now()) {
+      startHold(result, info, clientNow = Date.now()) {
         const { eventId, selection } = get();
         if (!eventId) return;
         set({
-          order: { id: result.orderId, eventId, holdExpiresAt: result.holdExpiresAt, total: result.total, items: selection },
+          order: { id: result.orderId, eventId, holdExpiresAt: result.holdExpiresAt, total: result.total, items: selection, info },
           clockOffset: result.serverNow - clientNow,
         });
       },
