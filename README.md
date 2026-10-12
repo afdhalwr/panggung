@@ -34,6 +34,7 @@ Untuk melihat rebutan kursi: buka denah yang sama di dua browser dengan dua akun
 | Browser menulis langsung ke database | [`firestore.rules`](firestore.rules) menolak **semua** penulisan dari browser. Penulisan hanya lewat Route Handler + Firebase Admin SDK setelah ID token diverifikasi. |
 | QR tiket dipalsukan | Isi QR `PANGGUNG.<id>.<HMAC>`, ditandatangani dengan kunci rahasia server ([`src/server/qr.ts`](src/server/qr.ts)). |
 | Pembayaran gagal | `?fail=true` meniru penolakan: order tetap `pending`, kursi tetap ditahan, pengguna bisa mencoba lagi. |
+| War tiket | Konser "panas" (Gelombang Elektrik 2026) memakai ruang tunggu simulasi: posisi dan perkiraan waktu turun bertahap, menutup halaman memunculkan peringatan, lolos antrean berlaku 15 menit. |
 
 ## Keputusan teknis
 
@@ -48,7 +49,7 @@ Untuk melihat rebutan kursi: buka denah yang sama di dua browser dengan dua akun
 
 | Cek | Hasil |
 | --- | --- |
-| Unit & komponen (Vitest + Testing Library) | 47 test: aturan hold, skema, katalog, QR, cart store, navigasi keyboard seat map |
+| Unit & komponen (Vitest + Testing Library) | 50 test: aturan hold, skema, katalog, QR, cart store, navigasi keyboard seat map, ruang tunggu antrean |
 | E2E (Playwright + Firebase Emulator) | 3 skenario: alur demo lengkap, bayar gagal lalu sukses, timer habis |
 | TypeScript | `strict`, tanpa `any` di `src/` |
 | Lighthouse mobile (lokal, build produksi) | Performa 85–95 per run, Aksesibilitas 100, Best Practices 100, SEO 100 di halaman detail konser |

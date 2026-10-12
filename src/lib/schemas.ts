@@ -41,6 +41,8 @@ export type Event = {
   pattern: PosterPattern;
   photo: string; // path di /public/photos
   featured?: boolean;
+  /** Konser "panas": halaman pilih tiket memakai ruang tunggu antrean (F9). */
+  highDemand?: boolean;
   popularity: number;
   categories: TicketCategory[];
 };
