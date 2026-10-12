@@ -39,12 +39,14 @@ Status kursi efektif = status seed, lalu ditimpa dokumen Firestore bila ada. Kur
 
 ### Skema Firestore
 
+Semua waktu disimpan sebagai angka epoch milidetik (bukan `Timestamp`), supaya tipe yang sama bisa dipakai di klien, server, dan aturan bisnis tanpa konversi.
+
 ```ts
 // seats/{eventId}_{seatId}
-{ eventId, seatId, status: 'held' | 'sold', uid, orderId, holdExpiresAt: Timestamp }
+{ eventId, seatId, status: 'held' | 'sold', uid, orderId, holdExpiresAt: number }
 
 // inventory/{eventId}_{categoryId}
-{ eventId, categoryId, sold: number, holds: { [orderId]: { qty: number, uid: string, expiresAt: Timestamp } } }
+{ eventId, categoryId, sold: number, holds: { [orderId]: { qty: number, uid: string, expiresAt: number } } }
 
 // orders/{orderId}
 { id, uid, eventId, items: { categoryId, seatId?, qty }[], buyer?: { name, email, phone, nik? },
@@ -134,6 +136,12 @@ Status kursi tidak lewat API; klien membaca Firestore langsung. Delay/chaos hany
 - Vercel: env diisi dengan `vercel env add NAME production --value ...` (bukan pipe dari PowerShell, karena menambah BOM).
 - CI: lint, type-check, Vitest, build, Playwright dengan emulator.
 
-## 11. Tugas yang butuh pemilik akun
+## 11. Catatan implementasi
+
+- Firebase Auth dan `firebase/app` dimuat lewat dynamic import saat browser senggang; Firestore SDK hanya di halaman denah. Tujuannya menjaga First Load JS halaman publik di 113 kB.
+- Order pending lama milik pengguna yang sama untuk event yang sama dibatalkan di transaction `createOrder`, termasuk hold festivalnya.
+- Halaman e-ticket dan daftar tiket mendapat info event dari `/api/tickets` (server memperkaya data), jadi klien tidak memuat data seed.
+
+## 12. Tugas yang butuh pemilik akun
 
 Membuat project Firebase, mengaktifkan Email/Password dan Firestore, membuat service account key, dan menghubungkan Vercel. Langkahnya ditulis di README; sebelum itu aplikasi berjalan penuh di emulator.
